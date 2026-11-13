@@ -31,6 +31,8 @@ public partial class MainWindow : Window
         SpicePageHost.Content = SpicePage.Create(_state, Save);
         SettingsPageHost.Content = SettingsPage.Create(_state, Save);
         if (_games.Count > 0) GameList.SelectedIndex = 0;
+        Title = $"Bemani Spice Manager {typeof(MainWindow).Assembly.GetName().Version?.ToString(3)}";
+        SetStatus($"Ready. {_games.Count} game(s) loaded from {AppState.DataFolder}  ({Environment.ProcessPath})");
         Closing += OnClosing;
     }
 
