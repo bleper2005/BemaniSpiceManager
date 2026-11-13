@@ -46,7 +46,15 @@ public abstract class GameModule
 
     /// <summary>Optional per-version name, e.g. "pop'n music Jam&amp;Fizz" from the datecode.</summary>
     public virtual string DisplayName(string model, string dateCode) => Name;
+
+    /// <summary>One-click spice2x option sets shown on the game page (e.g. touch screen setup).</summary>
+    public virtual IReadOnlyList<OptionPreset> Presets => Array.Empty<OptionPreset>();
 }
+
+/// <summary>A named group of spice2x options to switch on or off together.</summary>
+/// <param name="Set">Options to set (name → value, "1" for flags).</param>
+/// <param name="Clear">Options to remove when the preset is applied.</param>
+public sealed record OptionPreset(string Name, string Description, Dictionary<string, string> Set, string[]? Clear = null);
 
 /// <summary>
 /// A local e-amusement server. To add one, derive from ServerModule; it shows up in the

@@ -16,6 +16,16 @@ public sealed class PopnMusic : GameModule
         return base.Match(f);
     }
 
+    public override IReadOnlyList<OptionPreset> Presets => new[]
+    {
+        new OptionPreset("Touch screen: one monitor + mouse",
+            "Shows the PikaPika touch sub screen as an overlay on your main screen; click it with the mouse to touch.",
+            new() { ["s"] = "1", ["popnnosub"] = "1", ["sp2x-autosubscreen"] = "1" }),
+        new OptionPreset("Touch screen: second monitor",
+            "The sub screen opens on your second monitor (a real touch monitor works there too).",
+            new(), new[] { "popnnosub", "sp2x-autosubscreen" }),
+    };
+
     public override string DisplayName(string model, string dateCode)
     {
         if (model != "M39" || !long.TryParse(dateCode, out var d)) return Name;

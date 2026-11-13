@@ -141,6 +141,23 @@ public sealed class GamePage : ScrollViewer
             Button("Windowed", () => { _g.SpiceOptions["w"] = "1"; Changed(); Build(); }, "Quick toggle: run in a window"),
             Button("Fullscreen", () => { _g.SpiceOptions.Remove("w"); Changed(); Build(); })));
 
+        if (module?.Presets.Count > 0)
+        {
+            _root.Children.Add(Header("Quick setup"));
+            foreach (var p in module.Presets)
+            {
+                var active = p.Set.All(kv => _g.SpiceOptions.TryGetValue(kv.Key, out var v) && v == kv.Value)
+                             && (p.Clear ?? Array.Empty<string>()).All(k => !_g.SpiceOptions.ContainsKey(k));
+                _root.Children.Add(Setting(p.Name, Row(
+                    Button(active ? "✓ In use" : "Use this", () =>
+                    {
+                        foreach (var k in p.Clear ?? Array.Empty<string>()) _g.SpiceOptions.Remove(k);
+                        foreach (var (k, v) in p.Set) _g.SpiceOptions[k] = v;
+                        Changed(); Build();
+                    })), p.Description));
+            }
+        }
+
         _root.Children.Add(Header("Command line"));
         _cmd = new TextBox { IsReadOnly = true, TextWrapping = TextWrapping.Wrap, FontFamily = new FontFamily("Consolas"), Padding = new Thickness(4), Background = Brushes.WhiteSmoke };
         _root.Children.Add(_cmd);
