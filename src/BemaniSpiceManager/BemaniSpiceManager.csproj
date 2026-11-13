@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AssemblyName>BemaniSpiceManager</AssemblyName>
+    <RootNamespace>BemaniSpiceManager</RootNamespace>
+    <Version>0.1.0</Version>
+    <Product>Bemani Spice Manager</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SharpCompress" Version="0.50.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Data\spice-options.json" LogicalName="spice-options.json" />
+  </ItemGroup>
+
+</Project>

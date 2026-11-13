@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/BemaniSpiceManager/BemaniSpiceManager.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/BemaniSpiceManager.Tests/BemaniSpiceManager.Tests.csproj" />
+  </Folder>
+</Solution>

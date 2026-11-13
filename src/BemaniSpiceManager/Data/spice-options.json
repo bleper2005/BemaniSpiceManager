@@ -1,0 +1,4101 @@
+[
+ {
+  "id": "GameExecutable",
+  "title": "Override Game Executable & Disable Hooks",
+  "name": "exec",
+  "desc": "Path to the game DLL file.\n\nThis option is typically not needed; leave it empty to allow spice to auto-detect your game.\n\nWARNING: this option also disables all game-specific hooks and turns off most I/O modules!",
+  "setting_name": "*.dll",
+  "category": "Path Overrides",
+  "type": "Text"
+ },
+ {
+  "id": "OpenConfigurator",
+  "title": "Open Configurator",
+  "name": "cfg",
+  "desc": "Opens configuration window. This can only be launched via the command line (spice -cfg or spice64 -cfg) or just launch spicecfg.exe.",
+  "type": "Bool",
+  "hidden": true,
+  "disabled": true
+ },
+ {
+  "id": "OpenKFControl",
+  "title": "(REMOVED) Open KFControl",
+  "name": "kfcontrol",
+  "desc": "This feature has been removed; please use an older version.",
+  "type": "Bool",
+  "hidden": true,
+  "disabled": true
+ },
+ {
+  "id": "EAmusementEmulation",
+  "title": "Basic Local EA Emulation",
+  "name": "ea",
+  "desc": "Enables the integrated local EA server, just enough to boot the game; no card in, no data saving.",
+  "category": "Network",
+  "type": "Bool"
+ },
+ {
+  "id": "ServiceURL",
+  "title": "EA Service URL",
+  "name": "url",
+  "desc": "Sets a custom service URL override.",
+  "setting_name": "example.com:8083",
+  "category": "Network",
+  "type": "Text"
+ },
+ {
+  "id": "PCBID",
+  "title": "PCBID",
+  "name": "p",
+  "desc": "Sets a custom PCBID override.",
+  "setting_name": "01201000000000010101",
+  "category": "Network",
+  "type": "Text",
+  "sensitive": true
+ },
+ {
+  "id": "Player1Card",
+  "title": "Player 1 Card",
+  "name": "card0",
+  "desc": "Set a card number for reader 1. Overrides the selected card file.",
+  "setting_name": "E0040100FFFFFFFF",
+  "category": "Network",
+  "type": "Text",
+  "sensitive": true
+ },
+ {
+  "id": "Player2Card",
+  "title": "Player 2 Card",
+  "name": "card1",
+  "desc": "Set a card number for reader 2. Overrides the selected card file.",
+  "setting_name": "E0040100FFFFFFFF",
+  "category": "Network",
+  "type": "Text",
+  "sensitive": true
+ },
+ {
+  "id": "Player1PinMacro",
+  "title": "Player 1 PIN Macro",
+  "name": "pinmacro0",
+  "desc": "Set a PIN for Player 1 that will cause the PIN to be automatically typed when Player 1 PIN Macro overlay key is pressed.",
+  "setting_name": "1234",
+  "category": "Auto PIN",
+  "type": "Text",
+  "sensitive": true
+ },
+ {
+  "id": "Player2PinMacro",
+  "title": "Player 2 PIN Macro",
+  "name": "pinmacro1",
+  "desc": "Set a PIN for Player 2 that will cause the PIN to be automatically typed when Player 2 PIN Macro overlay key is pressed.",
+  "setting_name": "5678",
+  "category": "Auto PIN",
+  "type": "Text",
+  "sensitive": true
+ },
+ {
+  "id": "AutoPinMacroTrigger0",
+  "title": "Player 1 PIN Macro Auto Trigger on Log",
+  "name": "autopinmacrotrigger0",
+  "desc": "Substring matched against game log output to detect when Player 1's PIN entry screen is ready. When the substring appears in any log line, the PIN macro is typed for Player 1 only. Leave blank to disable auto-trigger for P1.",
+  "category": "Auto PIN",
+  "type": "Text"
+ },
+ {
+  "id": "AutoPinMacroTrigger1",
+  "title": "Player 2 PIN Macro Auto Trigger on Log",
+  "name": "autopinmacrotrigger1",
+  "desc": "Substring matched against game log output to detect when Player 2's PIN entry screen is ready. When the substring appears in any log line, the PIN macro is typed for Player 2 only. Leave blank to disable auto-trigger for P2.",
+  "category": "Auto PIN",
+  "type": "Text"
+ },
+ {
+  "id": "WindowedMode",
+  "title": "Windowed Mode",
+  "name": "w",
+  "desc": "Enables windowed mode.",
+  "category": "Windowed Settings",
+  "type": "Bool"
+ },
+ {
+  "id": "InjectHook",
+  "title": "Inject DLL Hooks",
+  "name": "k",
+  "desc": "Multiple files are allowed; use multiple -k flags, or in SpiceCfg, separate by space (foo.dll bar.dll baz.dll). Injects a hook by using LoadLibrary on the specified file before running the main game code.",
+  "setting_name": "a.dll b.dll c.dll",
+  "category": "DLL Hooks",
+  "type": "Text"
+ },
+ {
+  "id": "EarlyInjectHook",
+  "title": "Inject Early DLL Hooks",
+  "name": "z",
+  "desc": "Equivalent to 'Inject DLL Hooks' option, but ensures hooks are injected before the game module has been loaded into the process.",
+  "setting_name": "a.dll b.dll c.dll",
+  "category": "DLL Hooks",
+  "type": "Text"
+ },
+ {
+  "id": "ExecuteScript",
+  "title": "(REMOVED) Execute Lua Script",
+  "name": "script",
+  "desc": "This feature has been removed.",
+  "category": "Miscellaneous",
+  "type": "Text",
+  "hidden": true,
+  "disabled": true
+ },
+ {
+  "id": "CaptureCursor",
+  "title": "Lock Cursor to Window",
+  "name": "c",
+  "desc": "Confines the cursor to be within the game window.",
+  "category": "Mouse",
+  "type": "Bool"
+ },
+ {
+  "id": "ShowCursor",
+  "title": "Show Cursor & Touch Emulation Enable",
+  "name": "s",
+  "desc": "Shows the cursor in the game window; also turns on touch emulation. Do not enable this if you have a real touch screen.",
+  "category": "Mouse",
+  "type": "Bool"
+ },
+ {
+  "id": "PrimaryMonitor",
+  "title": "Change Main Monitor",
+  "name": "mainmonitor",
+  "desc": "Changes the primary monitor before launching the game. It will be restored on exit.\n\nThis may fail to work properly on hybrid laptops with iGPU + dGPU.",
+  "setting_name": "\\\\.\\DISPLAY2",
+  "category": "Monitor",
+  "type": "Text"
+ },
+ {
+  "id": "DXDisplayAdapter",
+  "title": "DX Primary Display Adapter Override",
+  "name": "monitor",
+  "desc": "Prefer to use Change Main Monitor option instead of this one.\n\nSets the display that the game will be opened in, for multiple monitors.\n\n0 is the primary monitor, 1 is the second monitor, and so on.\n\nNot all games will respect this. Not recommended for multi-monitor games like Lightning Model / Valkyrie Model modes. Disable Full Screen Optimizations for best results.",
+  "category": "Full Screen Settings",
+  "display_name": "dxmainadapter",
+  "aliases": "dxmainadapter",
+  "type": "Integer"
+ },
+ {
+  "id": "GraphicsForceSingleAdapter",
+  "title": "Only Use Main Monitor For Full Screen",
+  "name": "graphics-force-single-adapter",
+  "desc": "Force the graphics device to be opened utilizing only one adapter in multi-monitor systems.\n\nMay cause unstable framerate and desyncs, especially if monitors have different refresh rates!",
+  "category": "Full Screen Settings",
+  "type": "Bool"
+ },
+ {
+  "id": "GraphicsForceRefresh",
+  "title": "Monitor Refresh Rate",
+  "name": "graphics-force-refresh",
+  "desc": "Change the refresh rate for the primary monitor before launching the game. It will be restored on exit.",
+  "category": "Monitor",
+  "type": "Integer"
+ },
+ {
+  "id": "FullscreenResolution",
+  "title": "Force Full Screen Resolution",
+  "name": "forceres",
+  "desc": "For full screen mode, forcibly set a custom resolution.\n\nWorks great for some games, but can COMPLETELY BREAK other games - YMMV!\n\nIf you are using -forceresswap/-sdvxlandscape, put the TARGET monitor resolution in this field.\n\nThis should only be used as last resort if your GPU/monitor can't display the resolution required by the game.",
+  "setting_name": "1280,720",
+  "category": "Full Screen Settings",
+  "type": "Text"
+ },
+ {
+  "id": "FullscreenOrientationFlip",
+  "title": "Full Screen Orientation Swap (EXPERIMENTAL)",
+  "name": "forceresswap",
+  "desc": "Allows you to play portrait games in landscape (and vice versa) by transposing resolution and applying image scaling.\n\nWorks great for some games, but can COMPLETELY BREAK other games - YMMV!\n\nStrongly consider combining this with -forceres option to render at monitor native resolution.\n\nFor SDVX, use the dedicated -sdvxlandscape option.",
+  "category": "Full Screen Settings",
+  "type": "Bool",
+  "hidden": true
+ },
+ {
+  "id": "FullscreenSubResolution",
+  "title": "Force FS Subscreen Resolution (EXPERIMENTAL)",
+  "name": "forceressub",
+  "desc": "Override fullscreen resolution requested by the game for second monitor, useful if you have a sub monitor that is not quite exactly what the game expects.\n\nWARNING: experimental as we have not done extensive testing to see if this causes desyncs.",
+  "setting_name": "1280,720",
+  "category": "Full Screen Settings",
+  "type": "Text"
+ },
+ {
+  "id": "FullscreenSubRefreshRate",
+  "title": "Force FS Subscreen Refresh Rate (EXPERIMENTAL)",
+  "name": "graphics-force-refresh-sub",
+  "desc": "Override fullscreen refresh rate requested by the game for second monitor, useful if you have a sub monitor that is not quite exactly 60Hz.\n\nWARNING: experimental as we have not done extensive testing to see if this causes desyncs.",
+  "category": "Full Screen Settings",
+  "type": "Integer"
+ },
+ {
+  "id": "Graphics9On12",
+  "title": "DirectX 9 on 12 (DEPRECATED - use -dx9on12 instead)",
+  "name": "9on12",
+  "desc": "Use D3D9On12 wrapper library, requires Windows 10. Deprecated - use -dx9on12 instead.",
+  "category": "Graphics",
+  "type": "Bool",
+  "hidden": true
+ },
+ {
+  "id": "spice2x_Dx9On12",
+  "title": "DirectX 9 on 12",
+  "name": "sp2x-dx9on12",
+  "desc": "Use D3D9On12 wrapper library, requires Windows 10. Has no effect on games that don't use DX9. Can cause some games to crash.\n\nDefault: auto (use DX9 for most games, but turn on 9on12 for games that require it on non-NVIDIA GPUs).",
+  "category": "Graphics",
+  "display_name": "dx9on12",
+  "aliases": "dx9on12",
+  "type": "Enum",
+  "elements": [
+   [
+    "auto",
+    "Automatic"
+   ],
+   [
+    "0",
+    "Use DX9"
+   ],
+   [
+    "1",
+    "Use DX9on12"
+   ]
+  ]
+ },
+ {
+  "id": "NoLegacy",
+  "title": "Disable Win/Media/Special Keys",
+  "name": "nolegacy",
+  "desc": "Disables legacy key activation in-game.",
+  "category": "I/O Options",
+  "type": "Bool"
+ },
+ {
+  "id": "RichPresence",
+  "title": "Discord Rich Presence",
+  "name": "richpresence",
+  "desc": "Enables Discord Rich Presence support.",
+  "category": "Miscellaneous",
+  "type": "Bool"
+ },
+ {
+  "id": "DiscordAppID",
+  "title": "Discord RPC AppID Override",
+  "name": "discordappid",
+  "desc": "Set the discord RPC AppID override.",
+  "category": "Miscellaneous",
+  "type": "Text"
+ },
+ {
+  "id": "SmartEAmusement",
+  "title": "Smart Local EA",
+  "name": "smartea",
+  "desc": "Automatically enables -ea when server is offline.",
+  "category": "Advanced Network",
+  "type": "Bool"
+ },
+ {
+  "id": "EAmusementMaintenance",
+  "title": "EA Maintenance (DEPRECATED - use -forceeamaint instead)",
+  "name": "eamaint",
+  "desc": "Enables EA Maintenance, 1 for on, 0 for off.",
+  "category": "Advanced Network",
+  "type": "Enum",
+  "hidden": true,
+  "elements": [
+   [
+    "0",
+    "Off"
+   ],
+   [
+    "1",
+    "On"
+   ]
+  ]
+ },
+ {
+  "id": "spice2x_EAmusementMaintenance",
+  "title": "Local EA Maintenance",
+  "name": "sp2x-eamaint",
+  "desc": "Causes local EA to start in maintenance mode. Must be used with -ea or -smartea.",
+  "category": "Advanced Network",
+  "display_name": "forceeamaint",
+  "aliases": "forceeamaint",
+  "type": "Bool"
+ },
+ {
+  "id": "AdapterNetwork",
+  "title": "Preferred Network Adapter's IP",
+  "name": "network",
+  "desc": "Instead of using the default network adapter, force the usage of another network adapter with the specified IP address. You must also set -netadaptersubnet.",
+  "category": "Advanced Network",
+  "display_name": "netadapterip",
+  "aliases": "netadapterip",
+  "type": "Text",
+  "sensitive": true
+ },
+ {
+  "id": "AdapterSubnet",
+  "title": "Preferred Network Adapter's Subnet",
+  "name": "subnet",
+  "desc": "Instead of using the default network adapter, force the usage of another network adapter with the specified subnet. You must also set -netadapterip.",
+  "category": "Advanced Network",
+  "display_name": "netadaptersubnet",
+  "aliases": "netadaptersubnet",
+  "type": "Text"
+ },
+ {
+  "id": "DisableNetworkFixes",
+  "title": "Disable Network Fixes",
+  "name": "netfixdisable",
+  "desc": "Force disables network fixes.",
+  "category": "Network Dev",
+  "type": "Bool"
+ },
+ {
+  "id": "HTTP11",
+  "title": "HTTP/1.1",
+  "name": "http11",
+  "desc": "Sets EA3 http11 value.",
+  "category": "Network Dev",
+  "type": "Enum",
+  "elements": [
+   [
+    "0",
+    "Off"
+   ],
+   [
+    "1",
+    "On"
+   ]
+  ]
+ },
+ {
+  "id": "DisableSSL",
+  "title": "Disable SSL Protocol",
+  "name": "ssldisable",
+  "desc": "Prevents the SSL protocol from being registered.",
+  "category": "Network Dev",
+  "type": "Bool"
+ },
+ {
+  "id": "URLSlash",
+  "title": "URL Slash",
+  "name": "urlslash",
+  "desc": "Sets EA3 urlslash value.",
+  "category": "Advanced Network",
+  "type": "Enum",
+  "elements": [
+   [
+    "0",
+    "Off"
+   ],
+   [
+    "1",
+    "On"
+   ]
+  ]
+ },
+ {
+  "id": "SOFTID",
+  "title": "SOFTID",
+  "name": "r",
+  "desc": "Set custom SOFTID override.",
+  "category": "Development",
+  "type": "Text",
+  "sensitive": true
+ },
+ {
+  "id": "VREnable",
+  "title": "(REMOVED) VR controls (experimental)",
+  "name": "vr",
+  "desc": "This feature has been removed.",
+  "category": "Game Options",
+  "type": "Bool",
+  "hidden": true,
+  "disabled": true,
+  "games": [
+   "DANCERUSH"
+  ]
+ },
+ {
+  "id": "DisableOverlay",
+  "title": "Disable Spice Overlay",
+  "name": "overlaydisable",
+  "desc": "Disables the in-game overlay.",
+  "category": "General Overlay",
+  "type": "Bool"
+ },
+ {
+  "id": "OverlayKeyboardNavigation",
+  "title": "Overlay Keyboard Navigation",
+  "name": "keyboardnav",
+  "desc": "Enables keyboard navigation in the in-game overlay.",
+  "category": "General Overlay",
+  "type": "Bool"
+ },
+ {
+  "id": "OverlayScaling",
+  "title": "Spice Overlay UI Scale %",
+  "name": "overlayscale",
+  "desc": "Forces UI scaling for the overlay, things can look off since the UI was written for 100% scaling. Enter value in percentage, between 10-400, inclusive.",
+  "setting_name": "200",
+  "category": "General Overlay",
+  "type": "Integer"
+ },
+ {
+  "id": "NotificationPosition",
+  "title": "Notifications",
+  "name": "toast",
+  "desc": "Select where notifications will appear on the screen.",
+  "category": "General Overlay",
+  "type": "Enum",
+  "elements": [
+   [
+    "off",
+    ""
+   ],
+   [
+    "topleft",
+    ""
+   ],
+   [
+    "topright",
+    ""
+   ],
+   [
+    "bottomleft",
+    ""
+   ],
+   [
+    "bottomright",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "spice2x_FpsAutoShow",
+  "title": "Auto Show FPS/Clock",
+  "name": "sp2x-autofps",
+  "desc": "Automatically show FPS / clock / timer overlay window when the game starts.",
+  "category": "General Overlay",
+  "display_name": "autofps",
+  "aliases": "autofps",
+  "type": "Bool"
+ },
+ {
+  "id": "spice2x_FpsOpposite",
+  "title": "Show FPS/Clock top-left (DEPRECATED - use -fpslocation instead)",
+  "name": "fpsflip",
+  "desc": "Show FPS / clock / timer overlay on the top left of the screen instead of the top right. Deprecated - use -fpslocation instead.",
+  "category": "General Overlay",
+  "type": "Bool",
+  "hidden": true
+ },
+ {
+  "id": "FpsLocation",
+  "title": "FPS/Clock Location",
+  "name": "fpslocation",
+  "desc": "Select which corner of the screen the FPS / clock / timer overlay appears in.",
+  "category": "General Overlay",
+  "type": "Enum",
+  "elements": [
+   [
+    "topright",
+    ""
+   ],
+   [
+    "topleft",
+    ""
+   ],
+   [
+    "bottomleft",
+    ""
+   ],
+   [
+    "bottomright",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "spice2x_SubScreenAutoShow",
+  "title": "Auto Show Subscreen",
+  "name": "sp2x-autosubscreen",
+  "desc": "Automatically show the subscreen overlay when the game starts, if the game has one.",
+  "category": "General Overlay",
+  "display_name": "autosubscreen",
+  "aliases": "autosubscreen",
+  "type": "Bool"
+ },
+ {
+  "id": "spice2x_IOPanelAutoShow",
+  "title": "Auto Show IO Panel",
+  "name": "sp2x-autoiopanel",
+  "desc": "Automatically show I/O panel window when the game starts.",
+  "category": "General Overlay",
+  "display_name": "autoiopanel",
+  "aliases": "autoiopanel",
+  "type": "Bool"
+ },
+ {
+  "id": "spice2x_KeypadAutoShow",
+  "title": "Auto Show Keypad",
+  "name": "sp2x-autokeypad",
+  "desc": "Automatically show virtual keypad window when the game starts.",
+  "category": "General Overlay",
+  "display_name": "autokeypad",
+  "aliases": "autokeypad",
+  "type": "Enum",
+  "elements": [
+   [
+    "0",
+    "Off"
+   ],
+   [
+    "1",
+    "P1"
+   ],
+   [
+    "2",
+    "P2"
+   ],
+   [
+    "3",
+    "P1 and P2"
+   ]
+  ]
+ },
+ {
+  "id": "LoadIIDXModule",
+  "title": "Force Load IIDX Module",
+  "name": "iidx",
+  "desc": "Manually enable Beatmania IIDX module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Beatmania IIDX"
+  ]
+ },
+ {
+  "id": "IIDXCameraOrderFlip",
+  "title": "IIDX Camera Order Flip",
+  "name": "iidxflipcams",
+  "desc": "Flip the camera order.",
+  "category": "Cab Peripherals",
+  "type": "Bool",
+  "games": [
+   "Beatmania IIDX"
+  ]
+ },
+ {
+  "id": "IIDXDisableCameras",
+  "title": "IIDX Disable Cameras (DEPRECATED - no longer needed)",
+  "name": "iidxdisablecams",
+  "desc": "Disables cameras.",
+  "category": "Cab Peripherals",
+  "type": "Bool",
+  "hidden": true,
+  "games": [
+   "Beatmania IIDX"
+  ]
+ },
+ {
+  "id": "IIDXCabCamAccess",
+  "title": "IIDX Official AC Camera Access",
+  "name": "iidxcabcams",
+  "desc": "Controls how the game accesses USB cameras for IIDX 25+.\n\nauto (default): use [off] when the IIDX module is enabled; otherwise, use [on].\n\non: game discovers and directly accesses cameras; requires official cameras on correct USB ports.\n\nlegacy: for IIDX 25/26 only; allow camera access with emulated discovery.\n\noff: prevent game from accessing USB cameras.",
+  "category": "Cab Peripherals",
+  "type": "Enum",
+  "games": [
+   "Beatmania IIDX"
+  ],
+  "elements": [
+   [
+    "auto",
+    ""
+   ],
+   [
+    "on",
+    ""
+   ],
+   [
+    "legacy",
+    ""
+   ],
+   [
+    "off",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "IIDXCamHook",
+  "title": "IIDX Cam Hook",
+  "name": "iidxtdjcamhook",
+  "desc": "Experimental camera support for IIDX 27+ via texture hooking. Requires camera(s) that support YUY2 or NV12 encoding.",
+  "category": "Cab Peripherals",
+  "display_name": "iidxcamhook",
+  "aliases": "iidxcamhook",
+  "type": "Bool",
+  "games": [
+   "Beatmania IIDX"
+  ]
+ },
+ {
+  "id": "IIDXCamHookRatio",
+  "title": "IIDX Cam Hook Aspect Ratio",
+  "name": "iidxtdjcamhookratio",
+  "desc": "Determine what aspect ratio should be preferred for webcam input. Default: 16:9.",
+  "category": "Cab Peripherals",
+  "display_name": "iidxcamhookratio",
+  "aliases": "iidxcamhookratio",
+  "type": "Enum",
+  "hidden": true,
+  "games": [
+   "Beatmania IIDX"
+  ],
+  "elements": [
+   [
+    "43",
+    "4:3"
+   ],
+   [
+    "169",
+    "16:9"
+   ]
+  ]
+ },
+ {
+  "id": "IIDXCamHookOverride",
+  "title": "IIDX Cam Hook Offset Override",
+  "name": "iidxtdjcamhookoffset",
+  "desc": "Override DLL offsets for camera hook; format: 5 hex values separated by commas (offset_hook_a, offset_textures, offset_camera_manager, offset_d3d_device, offset_afp_texture).",
+  "setting_name": "0x5817a0,0x6fffbd8,0xbbae40,0xe0,0x30",
+  "category": "Cab Peripherals",
+  "display_name": "iidxcamhookoffset",
+  "aliases": "iidxcamhookoffset",
+  "type": "Text",
+  "games": [
+   "Beatmania IIDX"
+  ]
+ },
+ {
+  "id": "IIDXCamHookTopId",
+  "title": "IIDX Cam Hook Top ID",
+  "name": "iidxtdjcamhooktop",
+  "desc": "Specify a partial ID of the camera to use as the TOP camera. Useful if you have more than 3 cameras and need to tell spice which ones to use.\n\nTo get IDs, launch the game and look for camera IDs from MFEnumDeviceSources.\n\nFor example, `vid_1234&pid_5678` matches on `\\\\?\\usb#vid_1234&pid_5678&mi_00#7&234123456&1&0000#{e5323777-f976-4f5b-9b55-b94699c46e44}\\global`.",
+  "setting_name": "vid_1234&pid_5678",
+  "category": "Cab Peripherals",
+  "display_name": "iidxcamhooktop",
+  "aliases": "iidxcamhooktop",
+  "type": "Text",
+  "games": [
+   "Beatmania IIDX"
+  ]
+ },
+ {
+  "id": "IIDXCamHookFrontId",
+  "title": "IIDX Cam Hook Front ID",
+  "name": "iidxtdjcamhookfront",
+  "desc": "Specify a partial ID of the camera to use as the FRONT camera. Useful if you have more than 3 cameras and need to tell spice which ones to use.\n\nTo get IDs, launch the game and look for camera IDs from MFEnumDeviceSources.\n\nFor example, `vid_1234&pid_5678` matches on `\\\\?\\usb#vid_1234&pid_5678&mi_00#7&234123456&1&0000#{e5323777-f976-4f5b-9b55-b94699c46e44}\\global`.",
+  "setting_name": "vid_90ab&pid_cdef",
+  "category": "Cab Peripherals",
+  "display_name": "iidxcamhookfront",
+  "aliases": "iidxcamhookfront",
+  "type": "Text",
+  "games": [
+   "Beatmania IIDX"
+  ]
+ },
+ {
+  "id": "IIDXSoundOutputDevice",
+  "title": "IIDX Sound Output Device",
+  "name": "iidxsounddevice",
+  "desc": "SOUND_OUTPUT_DEVICE environment variable override. Default: auto. Auto will use WASAPI, unless -iidxasio is set or if XONAR SOUND CARD is present, then ASIO is used.",
+  "category": "Game Options",
+  "type": "Enum",
+  "games": [
+   "Beatmania IIDX"
+  ],
+  "elements": [
+   [
+    "auto",
+    "Automatic"
+   ],
+   [
+    "wasapi",
+    "Windows Audio"
+   ],
+   [
+    "asio",
+    "ASIO"
+   ]
+  ]
+ },
+ {
+  "id": "IIDXAsioDriver",
+  "title": "IIDX ASIO Driver",
+  "name": "iidxasio",
+  "desc": "ASIO driver name to use, replacing XONAR SOUND CARD(64). String should match registry key under HKLM\\SOFTWARE\\ASIO\\ \n\nIIDX is very picky about ASIO devices it can support, YMMV.",
+  "category": "Game Options",
+  "type": "Text",
+  "games": [
+   "Beatmania IIDX"
+  ]
+ },
+ {
+  "id": "IIDXBIO2FW",
+  "title": "IIDX BIO2 Firmware Update",
+  "name": "iidxbio2fw",
+  "desc": "Enables BIO2 firmware updates. WARNING - can cause semi-permanent change to your I/O board.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "hidden": true,
+  "games": [
+   "Beatmania IIDX"
+  ]
+ },
+ {
+  "id": "IIDXTDJMode",
+  "title": "IIDX TDJ Mode (Lightning Model)",
+  "name": "iidxtdj",
+  "desc": "Enables TDJ mode (Lightning Model cabinet).",
+  "category": "Game Options",
+  "type": "Bool",
+  "games": [
+   "Beatmania IIDX"
+  ]
+ },
+ {
+  "id": "spice2x_IIDXDigitalTTSensitivity",
+  "title": "IIDX Digital TT Sensitivity",
+  "name": "sp2x-iidxdigitalttsens",
+  "desc": "Adjust sensitivity of turntable when digital input (buttons) is used. Does not affect analog input! Default: 4.",
+  "setting_name": "(0-255)",
+  "category": "Advanced Game Options",
+  "display_name": "iidxdigitalttsens",
+  "aliases": "iidxdigitalttsens",
+  "type": "Integer",
+  "games": [
+   "Beatmania IIDX"
+  ]
+ },
+ {
+  "id": "IIDXDigitalTTSocd",
+  "title": "IIDX Digital TT SOCD Cleaner",
+  "name": "iidxsocd",
+  "desc": "SOCD for turntables when using button input; what happens when both directions are pressed.\n\nlast: most recently pressed direction takes priority\n\nfirst: first pressed direction takes priority\n\nneutral (default): TT does not move when both directions are pressed, recommended to avoid excessive POORs.",
+  "category": "Advanced Game Options",
+  "type": "Enum",
+  "games": [
+   "Beatmania IIDX"
+  ],
+  "elements": [
+   [
+    "last",
+    ""
+   ],
+   [
+    "first",
+    ""
+   ],
+   [
+    "neutral",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "spice2x_IIDXLDJForce720p",
+  "title": "IIDX LDJ Force 720p (HD)",
+  "name": "sp2x-iidxldjforce720p",
+  "desc": "Force Definition Type HD (720p) mode instead of FHD (1080p) for IIDX30+. Only for LDJ! TDJ is always FHD in IIDX30+.",
+  "category": "Advanced Game Options",
+  "display_name": "iidxldjforce720p",
+  "aliases": "iidxldjforce720p",
+  "type": "Bool",
+  "games": [
+   "Beatmania IIDX"
+  ]
+ },
+ {
+  "id": "spice2x_IIDXTDJSubSize",
+  "title": "IIDX TDJ Subscreen Size",
+  "name": "sp2x-iidxtdjsubsize",
+  "desc": "Default size of the subscreen overlay. Default: medium.",
+  "category": "Game Overlay",
+  "display_name": "iidxtdjsubsize",
+  "aliases": "iidxtdjsubsize",
+  "type": "Enum",
+  "games": [
+   "Beatmania IIDX"
+  ],
+  "elements": [
+   [
+    "small",
+    ""
+   ],
+   [
+    "medium",
+    ""
+   ],
+   [
+    "large",
+    ""
+   ],
+   [
+    "fullscreen",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "spice2x_IIDXLEDFontSize",
+  "title": "IIDX LED Ticker Font Size",
+  "name": "sp2x-iidxledfontsize",
+  "desc": "Configure the font size of the segment display, in pixels. Default: 64 (px).",
+  "category": "Game Overlay",
+  "display_name": "iidxledfontsize",
+  "aliases": "iidxledfontsize",
+  "type": "Integer",
+  "games": [
+   "Beatmania IIDX"
+  ]
+ },
+ {
+  "id": "spice2x_IIDXLEDColor",
+  "title": "IIDX LED Ticker Color",
+  "name": "sp2x-iidxledcolor",
+  "desc": "Configure the font color of the segment display; specify RGB value in hex. Default: 0xff0000 (red).",
+  "category": "Game Overlay",
+  "display_name": "iidxledcolor",
+  "aliases": "iidxledcolor",
+  "type": "Hex",
+  "games": [
+   "Beatmania IIDX"
+  ]
+ },
+ {
+  "id": "spice2x_IIDXLEDPos",
+  "title": "IIDX LED Ticker Position",
+  "name": "sp2x-iidxledpos",
+  "desc": "Initial position of the segment display. Default: bottom.",
+  "category": "Game Overlay",
+  "display_name": "iidxledpos",
+  "aliases": "iidxledpos",
+  "type": "Enum",
+  "games": [
+   "Beatmania IIDX"
+  ],
+  "elements": [
+   [
+    "topleft",
+    ""
+   ],
+   [
+    "top",
+    ""
+   ],
+   [
+    "topright",
+    ""
+   ],
+   [
+    "bottomleft",
+    ""
+   ],
+   [
+    "bottom",
+    ""
+   ],
+   [
+    "bottomright",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "IIDXLEDBorderless",
+  "title": "IIDX LED Ticker Borderless",
+  "name": "iidxledborderless",
+  "desc": "Make LED ticker overlay window borderless (remove window decoration).",
+  "category": "Game Overlay",
+  "aliases": "iidxledborderless",
+  "type": "Bool",
+  "games": [
+   "Beatmania IIDX"
+  ]
+ },
+ {
+  "id": "LoadSoundVoltexModule",
+  "title": "Force Load Sound Voltex Module",
+  "name": "sdvx",
+  "desc": "Manually enable Sound Voltex Module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Sound Voltex"
+  ]
+ },
+ {
+  "id": "SDVXForce720p",
+  "title": "SDVX Vivid Wave Force 720p Window (DEPRECATED - use -windowsize instead)",
+  "name": "sdvx720",
+  "desc": "Old & deprecated option for launching Vivid Wave in 720p when using windowed mode.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "hidden": true,
+  "games": [
+   "Sound Voltex"
+  ]
+ },
+ {
+  "id": "SDVXPrinterEmulation",
+  "title": "SDVX Printer Emulation",
+  "name": "printer",
+  "desc": "Enable Sound Voltex printer emulation.",
+  "category": "Cab Peripherals",
+  "type": "Bool",
+  "games": [
+   "Sound Voltex"
+  ]
+ },
+ {
+  "id": "SDVXPrinterOutputPath",
+  "title": "SDVX Printer Output Path",
+  "name": "printerpath",
+  "desc": "Path to folder where images will be stored.",
+  "category": "Cab Peripherals",
+  "type": "Text",
+  "games": [
+   "Sound Voltex"
+  ]
+ },
+ {
+  "id": "SDVXPrinterOutputClear",
+  "title": "SDVX Printer Output Clear",
+  "name": "printerclear",
+  "desc": "Clean up saved images in the output directory on startup.",
+  "category": "Cab Peripherals",
+  "type": "Bool",
+  "games": [
+   "Sound Voltex"
+  ]
+ },
+ {
+  "id": "SDVXPrinterOutputOverwrite",
+  "title": "SDVX Printer Output Overwrite",
+  "name": "printeroverwrite",
+  "desc": "Always overwrite the same file in output directory.",
+  "category": "Cab Peripherals",
+  "type": "Bool",
+  "games": [
+   "Sound Voltex"
+  ]
+ },
+ {
+  "id": "SDVXPrinterOutputFormat",
+  "title": "SDVX Printer Output Format",
+  "name": "printerformat",
+  "desc": "File format for printer output.",
+  "setting_name": "(png/bmp/tga/jpg)",
+  "category": "Cab Peripherals",
+  "type": "Text",
+  "games": [
+   "Sound Voltex"
+  ]
+ },
+ {
+  "id": "SDVXPrinterJPGQuality",
+  "title": "SDVX Printer JPG Quality",
+  "name": "printerjpgquality",
+  "desc": "Quality setting in percent if JPG format is used.",
+  "setting_name": "(0-100)",
+  "category": "Cab Peripherals",
+  "type": "Integer",
+  "games": [
+   "Sound Voltex"
+  ]
+ },
+ {
+  "id": "SDVXDisableCameras",
+  "title": "SDVX Disable Cameras (DEPRECATED - no longer needed)",
+  "name": "sdvxdisablecams",
+  "desc": "This option does nothing.\n\nThis option was used in the past to fix cameras in SDVX5 but this is no longer needed as camera check will always be skipped with a built-in patch.",
+  "category": "Cab Peripherals",
+  "type": "Bool",
+  "hidden": true,
+  "games": [
+   "Sound Voltex"
+  ]
+ },
+ {
+  "id": "SDVXNativeTouch",
+  "title": "SDVX Native Touch (DEPRECATED - no longer needed)",
+  "name": "sdvxnativetouch",
+  "desc": "This option does nothing.\n\nNative touch handling is now enabled by default and this option is no longer needed.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "hidden": true,
+  "games": [
+   "Sound Voltex"
+  ]
+ },
+ {
+  "id": "spice2x_SDVXSubRedraw",
+  "title": "SDVX FS Subscreen Force Redraw",
+  "name": "sp2x-sdvxsubredraw",
+  "desc": "Check if submonitor in fullscreen mode doesn't update every frame; this option presents the subscreen when the game does not.",
+  "category": "Advanced Game Options",
+  "display_name": "sdvxsubredraw",
+  "aliases": "sdvxsubredraw",
+  "type": "Bool",
+  "games": [
+   "Sound Voltex"
+  ]
+ },
+ {
+  "id": "spice2x_SDVXDigitalKnobSensitivity",
+  "title": "SDVX Digital Knob Sensitivity",
+  "name": "sp2x-sdvxdigitalknobsens",
+  "desc": "Adjust sensitivity of knobs when digital input (buttons) is used. Does not affect analog input! Default: 16.",
+  "setting_name": "(0-255)",
+  "category": "Advanced Game Options",
+  "display_name": "sdvxdigitalknobsens",
+  "aliases": "sdvxdigitalknobsens",
+  "type": "Integer",
+  "games": [
+   "Sound Voltex"
+  ]
+ },
+ {
+  "id": "SDVXDigitalKnobSocd",
+  "title": "SDVX Digital Knob SOCD Cleaner",
+  "name": "sdvxsocd",
+  "desc": "SOCD for knobs when using button input; what happens when both directions are pressed.\n\nlast (default): most recently pressed direction takes priority, recommended to deal with slams\n\nfirst: first pressed direction takes priority\n\nneutral: knob does not move when both directions are pressed.",
+  "category": "Advanced Game Options",
+  "type": "Enum",
+  "games": [
+   "Sound Voltex"
+  ],
+  "elements": [
+   [
+    "last",
+    ""
+   ],
+   [
+    "first",
+    ""
+   ],
+   [
+    "neutral",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "spice2x_SDVXAsioDriver",
+  "title": "SDVX ASIO driver",
+  "name": "sp2x-sdvxasio",
+  "desc": "ASIO driver name to use, replacing XONAR SOUND CARD(64). String should match registry key under HKLM\\SOFTWARE\\ASIO\\ \n\nSDVX is EXTREMELY picky about ASIO devices it can support!",
+  "category": "Game Options",
+  "display_name": "sdvxasio",
+  "aliases": "sdvxasio",
+  "type": "Text",
+  "games": [
+   "Sound Voltex"
+  ]
+ },
+ {
+  "id": "SDVXAsioTwoChannel",
+  "title": "SDVX ASIO Two Channel Audio",
+  "name": "sdvxasio2ch",
+  "desc": "Force the game to use two channels for ASIO output.",
+  "category": "Game Options",
+  "type": "Bool",
+  "games": [
+   "Sound Voltex"
+  ]
+ },
+ {
+  "id": "SDVXDisableLive2D",
+  "title": "SDVX Disable Live2D (EXPERIMENTAL)",
+  "name": "sdvxnolive2d",
+  "desc": "Skip rendering the SDVX Live2D graphics to save GPU.\n\noff: leave Live2D as-is.\nalways: hide Live2D (also hides menu navigator).\ningame: only hide Live2D during a song; keeps the menu navigator. Scene detection relies on game logging.",
+  "category": "Advanced Game Options",
+  "type": "Enum",
+  "games": [
+   "Sound Voltex"
+  ],
+  "elements": [
+   [
+    "off",
+    "Show Live2D"
+   ],
+   [
+    "always",
+    "Hide Live2D"
+   ],
+   [
+    "ingame",
+    "Hide during songs"
+   ]
+  ]
+ },
+ {
+  "id": "spice2x_SDVXSubPos",
+  "title": "SDVX Subscreen Overlay Position",
+  "name": "sp2x-sdvxsubpos",
+  "desc": "Location for the subscreen overlay. Default: bottom.",
+  "category": "Game Overlay",
+  "display_name": "sdvxsubpos",
+  "aliases": "sdvxsubpos",
+  "type": "Enum",
+  "games": [
+   "Sound Voltex"
+  ],
+  "elements": [
+   [
+    "top",
+    ""
+   ],
+   [
+    "center",
+    ""
+   ],
+   [
+    "bottom",
+    ""
+   ],
+   [
+    "bottomleft",
+    "for landscape"
+   ],
+   [
+    "bottomright",
+    "for landscape"
+   ]
+  ]
+ },
+ {
+  "id": "SDVXSubMonitorOverride",
+  "title": "SDVX Subscreen Monitor Override",
+  "name": "sdvxsubmonitor",
+  "desc": "If you have three or more monitors, this option can be set to tell the game which monitor is the subscreen.",
+  "setting_name": "\\\\.\\DISPLAY3",
+  "category": "Full Screen Settings",
+  "type": "Text",
+  "games": [
+   "Sound Voltex"
+  ]
+ },
+ {
+  "id": "LoadDDRModule",
+  "title": "Force Load DDR Module",
+  "name": "ddr",
+  "desc": "Manually enable Dance Dance Revolution module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Dance Dance Revolution"
+  ]
+ },
+ {
+  "id": "DDR43Mode",
+  "title": "DDR 4:3 Mode",
+  "name": "ddrsd/o",
+  "desc": "Enable DDR 4:3 (SD) mode.",
+  "category": "Game Options",
+  "type": "Bool",
+  "games": [
+   "Dance Dance Revolution"
+  ]
+ },
+ {
+  "id": "DDRSkipCodecRegisteration",
+  "title": "DDR Skip Codec Registration",
+  "name": "ddrnocodec",
+  "desc": "Prevent automatic registration of codecs in the com folder.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Dance Dance Revolution"
+  ]
+ },
+ {
+  "id": "LoadPopnMusicModule",
+  "title": "Force Load Pop'n Music Module",
+  "name": "pnm",
+  "desc": "Manually enable Pop'n Music module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Pop'n Music"
+  ]
+ },
+ {
+  "id": "PopnMusicForceHDMode",
+  "title": "Pop'n Music Force HD Mode",
+  "name": "pnmhd",
+  "desc": "Force enable Pop'n Music HD mode.",
+  "category": "Game Options",
+  "type": "Bool",
+  "games": [
+   "Pop'n Music"
+  ]
+ },
+ {
+  "id": "PopnMusicForceSDMode",
+  "title": "Pop'n Music Force SD Mode",
+  "name": "pnmsd",
+  "desc": "Force enable Pop'n Music SD mode.",
+  "category": "Game Options",
+  "type": "Bool",
+  "games": [
+   "Pop'n Music"
+  ]
+ },
+ {
+  "id": "PopnNoSub",
+  "title": "Pop'n Music PikaPika Subscreen Disable",
+  "name": "popnnosub",
+  "desc": "Prevents PikaPika model subscreen from launching a separate window.",
+  "category": "Game Options",
+  "type": "Bool",
+  "games": [
+   "Pop'n Music"
+  ]
+ },
+ {
+  "id": "PopnSubMonitorOverride",
+  "title": "Pop'n Music PikaPika Subscreen Monitor Override",
+  "name": "popnsubmonitor",
+  "desc": "If you have three or more monitors, this option can be set to tell the game which monitor is the subscreen.",
+  "setting_name": "\\\\.\\DISPLAY3",
+  "category": "Full Screen Settings",
+  "type": "Text",
+  "games": [
+   "Pop'n Music"
+  ]
+ },
+ {
+  "id": "PopnNativeTouch",
+  "title": "Pop'n Music Native Touch (DEPRECATED - no longer needed)",
+  "name": "popnnativetouch",
+  "desc": "This option does nothing.\n\nNative touch handling is now enabled by default and this option is no longer needed.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "hidden": true,
+  "games": [
+   "Pop'n Music"
+  ]
+ },
+ {
+  "id": "PopnSubRedraw",
+  "title": "Pop'n Music PikaPika Subscreen Force Redraw",
+  "name": "popnsubredraw",
+  "desc": "Check if submonitor in fullscreen mode appears stuck; this option presents the subscreen when the game does not.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Pop'n Music"
+  ]
+ },
+ {
+  "id": "LoadHelloPopnMusicModule",
+  "title": "Force Load HELLO! Pop'n Music Module",
+  "name": "hpm",
+  "desc": "Manually enable HELLO! Pop'n Music module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "HELLO! Pop'n Music"
+  ]
+ },
+ {
+  "id": "LoadGitaDoraModule",
+  "title": "Force Load GitaDora Module",
+  "name": "gd",
+  "desc": "Manually enable GitaDora module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "GitaDora"
+  ]
+ },
+ {
+  "id": "GitaDoraTwoChannelAudio",
+  "title": "GitaDora Two Channel Audio",
+  "name": "2ch",
+  "desc": "Attempt to reduce audio channels down to just two channels.",
+  "category": "Game Options",
+  "type": "Bool",
+  "games": [
+   "GitaDora"
+  ]
+ },
+ {
+  "id": "GitaDoraDisableFrameLimiter",
+  "title": "GitaDora Disable Frame Limiter (EXPERIMENTAL)",
+  "name": "gdnoframelimiter",
+  "desc": "Only for GITADORA to GALAXY WAVE; not for XG series or Arena Model.\n\nGame engine's built-in frame limiter can result in unstable frame pacing (around 56-58 FPS) on modern Windows. Turning this on disables that and forces the game to rely on V-Sync instead, resulting in a stable FPS.\n\nEnsure your monitors are set to 60Hz.",
+  "category": "Game Options",
+  "type": "Bool",
+  "games": [
+   "GitaDora"
+  ]
+ },
+ {
+  "id": "GitaDoraCabinetType",
+  "title": "GitaDora Cabinet Type",
+  "name": "gdcabtype",
+  "desc": "Select cabinet type. DX has more input and lights. Pick SD2 for single player guitar mode on white cab.",
+  "category": "Game Options",
+  "type": "Enum",
+  "games": [
+   "GitaDora"
+  ],
+  "elements": [
+   [
+    "1",
+    "DX"
+   ],
+   [
+    "2",
+    "SD"
+   ],
+   [
+    "3",
+    "SD2 - white cab"
+   ]
+  ]
+ },
+ {
+  "id": "GitaDoraLefty",
+  "title": "GitaDora Lefty Guitar (for Digital Wailing)",
+  "name": "gdlefty",
+  "desc": "Enables lefty mode, flipping motion sensor directions. Default: off.\n\nWithout this option, enabling LEFT in the game option will continuously trigger UP wail.\n\nHas no effect if you are using analog bindings for X/Y axis; most controllers do not handle this correctly.\n\nAs always, remember to restart the game after changing options. If you need to change in the game, use the I/O panel overlay window.",
+  "category": "Game Options",
+  "type": "Enum",
+  "games": [
+   "GitaDora"
+  ],
+  "elements": [
+   [
+    "off",
+    "both righty"
+   ],
+   [
+    "p1",
+    "p1 is lefty"
+   ],
+   [
+    "p2",
+    "p2 is lefty"
+   ],
+   [
+    "both",
+    "both lefty"
+   ]
+  ]
+ },
+ {
+  "id": "GitaDoraWailHold",
+  "title": "GitaDora Digital Wail Hold",
+  "name": "gdwailhold",
+  "desc": "For digital wail input, how long (in milliseconds) to hold the wail state. Practically, this controls how sensitive wailing is.\n\nDefault: 100 (ms)\n\nIf set to 0, no hold will occur, which means you need to press the wail button longer to register; default value of 100ms will cause the game to trigger wail even on a light tap of the button.",
+  "category": "Game Options",
+  "type": "Integer",
+  "games": [
+   "GitaDora"
+  ]
+ },
+ {
+  "id": "GitaDoraPickAlgo",
+  "title": "GitaDora Picking Algorithm",
+  "name": "gdpickalgo",
+  "desc": "Select picking algorithm for guitar.\n\nrecent (default): use SOCD cleaner algorithm that prioritizes recent input\n\nlegacy: only the rising edge of the pick input is considered; cannot hold pick for menu navigation\n\nneutral: if both up and down are pressed, they cancel out\n\nraw: no filtering done by spice; game receives both input as-is, possible to input both up and down at the same time",
+  "category": "Game Options",
+  "type": "Enum",
+  "games": [
+   "GitaDora"
+  ],
+  "elements": [
+   [
+    "recent",
+    ""
+   ],
+   [
+    "legacy",
+    ""
+   ],
+   [
+    "neutral",
+    ""
+   ],
+   [
+    "raw",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "GitaDoraSubOverlaySize",
+  "title": "GitaDora Subscreen Overlay Size",
+  "name": "gdsubsize",
+  "desc": "Default size of the subscreen overlay. Default: medium.",
+  "category": "Game Overlay",
+  "type": "Enum",
+  "games": [
+   "GitaDora"
+  ],
+  "elements": [
+   [
+    "small",
+    ""
+   ],
+   [
+    "medium",
+    ""
+   ],
+   [
+    "large",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "GitaDoraArenaSingleWindow",
+  "title": "GitaDora Arena Disable Subscreens (DEPRECATED - use -gdalayout)",
+  "name": "gdaonewindow",
+  "desc": "DEPRECATED - use -gdalayout.\n\nFor Arena Model:\n\nWindowed mode: instead of 4 windows, create 1 window.\n\nFullscreen mode: instead of requiring 4 monitors, use only the primary monitor. WARNING: requires 4K monitor.\n\nTo access the subscreen, use the subscreen overlay.",
+  "category": "Game Options",
+  "type": "Bool",
+  "hidden": true,
+  "games": [
+   "GitaDora"
+  ]
+ },
+ {
+  "id": "GitaDoraArenaWindowLayout",
+  "title": "GitaDora Arena Layout (EXPERIMENTAL)",
+  "name": "gdalayout",
+  "desc": "For Arena Model: select how many windows to create.\n\n1 window: main only; use the subscreen overlay for SMALL.\n\n2 windows: main + SMALL. Without -w, this uses native D3D9 adapter-group fullscreen with physical MAIN/SMALL and virtual LEFT/RIGHT. It requires two active displays on one adapter group. With -w, it uses borderless windows instead.\n\n4 windows: main + LEFT + RIGHT + SMALL. Fullscreen requires exactly 4 monitors in the right resolution; see wiki for details.",
+  "category": "Game Options",
+  "type": "Enum",
+  "games": [
+   "GitaDora"
+  ],
+  "elements": [
+   [
+    "1",
+    "1 window"
+   ],
+   [
+    "2",
+    "2 windows"
+   ],
+   [
+    "4",
+    "4 windows"
+   ]
+  ]
+ },
+ {
+  "id": "GitaDoraArenaSubLayout",
+  "title": "GitaDora Arena Subscreen Layout (EXPERIMENTAL)",
+  "name": "gdasublayout",
+  "desc": "For Arena Model full screen two-window mode: select the image layout on the second monitor.\n\nportrait (default): default subscreen @ 800x1280\n\nlandscape: pillarboxed subscreen @ 1920x1080\n\ncombine: LEFT + SMALL + RIGHT screens side by side @ 1920x1080\n\nFor landscape and combine, -forceressub can be used to override the resolution.",
+  "category": "Game Options",
+  "type": "Enum",
+  "games": [
+   "GitaDora"
+  ],
+  "elements": [
+   [
+    "portrait",
+    ""
+   ],
+   [
+    "landscape",
+    ""
+   ],
+   [
+    "combine",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "GitaDoraArenaAsioDriver",
+  "title": "GitaDora Arena ASIO driver",
+  "name": "gdaasio",
+  "desc": "For Arena Model: ASIO driver name to use in place of XONAR. String should match a subkey under HKLM\\SOFTWARE\\ASIO\\\n\nRequires 7.1 @ 48kHz; if the game rejects your ASIO device, it will automatically fall back to using WASAPI.\n\nIf the game crashes after successful ASIO init, try enabling -gdafakerealtek.",
+  "category": "Game Options",
+  "type": "Text",
+  "games": [
+   "GitaDora"
+  ]
+ },
+ {
+  "id": "GitaDoraArenaRealtekAccess",
+  "title": "GitaDora Arena ASIO Allow Headphones",
+  "name": "gdarealtek",
+  "desc": "For Arena Model: allow the game to access the Realtek audio for headphone output.\n\nAfter opening ASIO device, the game then tries to look for audio devices named Realtek to open a second audio stream. For compatibility, spice prevents the game from doing this, but enabling this option will allow the game to access the Realtek audio device again.",
+  "category": "Game Options",
+  "type": "Bool",
+  "games": [
+   "GitaDora"
+  ]
+ },
+ {
+  "id": "LoadJubeatModule",
+  "title": "Force Load Jubeat Module",
+  "name": "jb",
+  "desc": "Manually enable Jubeat module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Jubeat"
+  ]
+ },
+ {
+  "id": "LoadReflecBeatModule",
+  "title": "Force Load Reflec Beat Module",
+  "name": "rb",
+  "desc": "Manually enable Reflec Beat module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Reflec Beat"
+  ]
+ },
+ {
+  "id": "LoadShogikaiModule",
+  "title": "Force Load Tenkaichi Shogikai Module",
+  "name": "shogikai",
+  "desc": "Manually enable Tenkaichi Shogikai module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Tenkaichi Shogikai"
+  ]
+ },
+ {
+  "id": "LoadBeatstreamModule",
+  "title": "Force Load Beatstream Module",
+  "name": "bs",
+  "desc": "Manually enable Beatstream module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Beatstream"
+  ]
+ },
+ {
+  "id": "LoadNostalgiaModule",
+  "title": "Force Load Nostalgia Module",
+  "name": "nostalgia",
+  "desc": "Manually enable Nostalgia module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Nostalgia"
+  ]
+ },
+ {
+  "id": "LoadDanceEvolutionModule",
+  "title": "Force Load Dance Evolution Module",
+  "name": "dea",
+  "desc": "Manually enable Dance Evolution module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Dance Evolution"
+  ]
+ },
+ {
+  "id": "LoadFutureTomTomModule",
+  "title": "Force Load FutureTomTom Module",
+  "name": "ftt",
+  "desc": "Manually enable FutureTomTom module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "FutureTomTom"
+  ]
+ },
+ {
+  "id": "LoadBBCModule",
+  "title": "Force Load BBC Module",
+  "name": "bbc",
+  "desc": "Manually enable Bishi Bashi Channel module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Bishi Bashi Channel"
+  ]
+ },
+ {
+  "id": "LoadMetalGearArcadeModule",
+  "title": "Force Load Metal Gear Arcade Module",
+  "name": "mga",
+  "desc": "Manually enable Metal Gear Arcade module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Metal Gear"
+  ]
+ },
+ {
+  "id": "LoadQuizMagicAcademyModule",
+  "title": "Force Load Quiz Magic Academy Module",
+  "name": "qma",
+  "desc": "Manually enable Quiz Magic Academy module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Quiz Magic Academy"
+  ]
+ },
+ {
+  "id": "LoadRoadFighters3DModule",
+  "title": "Force Load Road Fighters 3D Module",
+  "name": "rf3d",
+  "desc": "Manually enable Road Fighters 3D module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Road Fighters 3D"
+  ]
+ },
+ {
+  "id": "LoadSteelChronicleModule",
+  "title": "Force Load Steel Chronicle Module",
+  "name": "sc",
+  "desc": "Manually enable Steel Chronicle module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Steel Chronicle"
+  ]
+ },
+ {
+  "id": "LoadMahjongFightClubModule",
+  "title": "Force Load Mahjong Fight Club Module",
+  "name": "mfc",
+  "desc": "Manually enable Mahjong Fight Club module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Mahjong Fight Club"
+  ]
+ },
+ {
+  "id": "LoadScottoModule",
+  "title": "Force Load Scotto Module",
+  "name": "scotto",
+  "desc": "Manually enable Scotto module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Scotto"
+  ]
+ },
+ {
+  "id": "LoadDanceRushModule",
+  "title": "Force Load Dance Rush Module",
+  "name": "dr",
+  "desc": "Manually enable Dance Rush module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "DANCERUSH"
+  ]
+ },
+ {
+  "id": "LoadWinningElevenModule",
+  "title": "Force Load Winning Eleven Module",
+  "name": "we",
+  "desc": "Manually enable Winning Eleven module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Winning Eleven"
+  ]
+ },
+ {
+  "id": "LoadOtocaModule",
+  "title": "Force Load Otoca D'or Module",
+  "name": "otoca",
+  "desc": "Manually enable Otoca D'or module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Otoca D'or"
+  ]
+ },
+ {
+  "id": "LoadLovePlusModule",
+  "title": "Force Load LovePlus Module",
+  "name": "loveplus",
+  "desc": "Manually enable LovePlus module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "LovePlus"
+  ]
+ },
+ {
+  "id": "LoadChargeMachineModule",
+  "title": "Force Load Charge Machine Module",
+  "name": "pcm",
+  "desc": "Manually enable Charge Machine module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Charge Machine"
+  ]
+ },
+ {
+  "id": "LoadOngakuParadiseModule",
+  "title": "Force Load Ongaku Paradise Module",
+  "name": "onpara",
+  "desc": "Manually enable Ongaku Paradise module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Ongaku Paradise"
+  ]
+ },
+ {
+  "id": "LoadBusouShinkiModule",
+  "title": "Force Load Busou Shinki Module",
+  "name": "busou",
+  "desc": "Manually enable Busou Shinki module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Busou Shinki: Armored Princess Battle Conductor"
+  ]
+ },
+ {
+  "id": "LoadCCJModule",
+  "title": "Force Load Chase Chase Jokers Module",
+  "name": "ccj",
+  "desc": "Manually enable Chase Chase Jokers module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Chase Chase Jokers"
+  ]
+ },
+ {
+  "id": "LoadQKSModule",
+  "title": "Force Load QuizKnock STADIUM Module",
+  "name": "qks",
+  "desc": "Manually enable QuizKnock STADIUM module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "QuizKnock STADIUM"
+  ]
+ },
+ {
+  "id": "LoadMFGModule",
+  "title": "Force Load Mahjong Fight Girl Module",
+  "name": "mfg",
+  "desc": "Manually enable Mahjong Fight Girl module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Mahjong Fight Girl"
+  ]
+ },
+ {
+  "id": "LoadPCModule",
+  "title": "Force Load Polaris Chord Module",
+  "name": "pc",
+  "desc": "Manually enable Polaris Chord module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Polaris Chord"
+  ]
+ },
+ {
+  "id": "LoadUDNModule",
+  "title": "Force Load DANCE aROUND Module",
+  "name": "udn",
+  "desc": "Manually enable DANCE aROUND module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "DANCE aROUND"
+  ]
+ },
+ {
+  "id": "LoadMusecaModule",
+  "title": "Force Load Museca Module",
+  "name": "museca",
+  "desc": "Manually enable Museca module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Museca"
+  ]
+ },
+ {
+  "id": "LoadCardConnectModule",
+  "title": "Force Load Card Connect Module",
+  "name": "cardconnect",
+  "desc": "Manually enable Card Connect module.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Card Connect"
+  ]
+ },
+ {
+  "id": "PathToModules",
+  "title": "Modules Folder Override",
+  "name": "modules",
+  "desc": "Sets a custom path to the modules folder.",
+  "category": "Path Overrides",
+  "type": "Text"
+ },
+ {
+  "id": "ScreenshotFolder",
+  "title": "Screenshot Folder Override",
+  "name": "screenshotpath",
+  "desc": "Sets a custom path to the screenshots folder.",
+  "category": "Path Overrides",
+  "type": "Text"
+ },
+ {
+  "id": "ConfigurationPath",
+  "title": "Configuration Path Override",
+  "name": "cfgpath",
+  "desc": "Sets a custom file path for config file. Must be passed via the command line. If left empty, %appdata%\\spicetools.xml will be used.",
+  "setting_name": "(default)",
+  "category": "Path Overrides",
+  "type": "Text",
+  "disabled": true
+ },
+ {
+  "id": "ScreenResizeConfigPath",
+  "title": "Screen Resize Config Path Override",
+  "name": "resizecfgpath",
+  "desc": "Sets a custom file path for screen resize config file. If left empty, %appdata%\\spice2x\\spicetools_screen_resize.json will be used.",
+  "category": "Path Overrides",
+  "type": "Text"
+ },
+ {
+  "id": "PatchManagerConfigPath",
+  "title": "Patch Manager Config Path Override",
+  "name": "patchcfgpath",
+  "desc": "Sets a custom file path for patch manager config file. Can be used to manage 'profiles' for auto-patches. If left empty, %appdata%\\spice2x\\spicetools_patch_manager.json will be used.",
+  "category": "Path Overrides",
+  "type": "Text"
+ },
+ {
+  "id": "IntelSDEFolder",
+  "title": "Intel SDE",
+  "name": "sde",
+  "desc": "Path to Intel SDE kit path for automatic attaching.",
+  "category": "Development",
+  "type": "Text"
+ },
+ {
+  "id": "PathToEa3Config",
+  "title": "ea3-config.xml Override",
+  "name": "e",
+  "desc": "Sets a custom path to ea3-config.xml.",
+  "category": "Path Overrides",
+  "type": "Text"
+ },
+ {
+  "id": "PathToAppConfig",
+  "title": "app-config.xml Override",
+  "name": "a",
+  "desc": "Sets a custom path to app-config.xml.",
+  "category": "Path Overrides",
+  "type": "Text"
+ },
+ {
+  "id": "PathToAvsConfig",
+  "title": "avs-config.xml Override",
+  "name": "v",
+  "desc": "Sets a custom path to avs-config.xml.",
+  "category": "Path Overrides",
+  "type": "Text"
+ },
+ {
+  "id": "PathToBootstrap",
+  "title": "bootstrap.xml Override",
+  "name": "b",
+  "desc": "Sets a custom path to bootstrap.xml.",
+  "category": "Path Overrides",
+  "type": "Text"
+ },
+ {
+  "id": "PathToLog",
+  "title": "log.txt Override",
+  "name": "y",
+  "desc": "Sets a custom path to log.txt.",
+  "category": "Path Overrides",
+  "type": "Text"
+ },
+ {
+  "id": "APITCPPort",
+  "title": "API TCP Port",
+  "name": "api",
+  "desc": "Port the API should be listening on.",
+  "category": "Companion & API",
+  "type": "Integer"
+ },
+ {
+  "id": "APIPassword",
+  "title": "API Password",
+  "name": "apipass",
+  "desc": "Set the custom user password needed to use the API.",
+  "category": "Companion & API",
+  "type": "Text",
+  "sensitive": true
+ },
+ {
+  "id": "APIVerboseLogging",
+  "title": "API Verbose Logging",
+  "name": "apilogging",
+  "desc": "Verbose logging of API activity.",
+  "category": "API Dev",
+  "type": "Bool"
+ },
+ {
+  "id": "APISerialPort",
+  "title": "API Serial Port",
+  "name": "apiserial",
+  "desc": "Serial port the API should be listening on.",
+  "category": "Serial API",
+  "type": "Text"
+ },
+ {
+  "id": "APISerialBaud",
+  "title": "API Serial Baud",
+  "name": "apiserialbaud",
+  "desc": "Baud rate for the serial port.",
+  "category": "Serial API",
+  "type": "Integer"
+ },
+ {
+  "id": "APIPretty",
+  "title": "API Pretty",
+  "name": "apipretty",
+  "desc": "Slower, but pretty API output.",
+  "category": "API Dev",
+  "type": "Bool"
+ },
+ {
+  "id": "APIDebugMode",
+  "title": "API Debug Mode",
+  "name": "apidebug",
+  "desc": "Enables API debugging mode.",
+  "category": "API Dev",
+  "type": "Bool"
+ },
+ {
+  "id": "APIScreenMirrorQuality",
+  "title": "API Screen Mirror Quality Override",
+  "name": "apiscreenq",
+  "desc": "JPEG compression level of mirrored images, overriding any client request. Value must be between 0 (poor quality) and 100 (best quality), inclusive. Default: 70.",
+  "setting_name": "(0-100)",
+  "category": "API Dev",
+  "type": "Integer"
+ },
+ {
+  "id": "APIScreenMirrorDivide",
+  "title": "API Screen Mirror Divide Override",
+  "name": "apiscreendiv",
+  "desc": "Divide value of mirrored images, overriding any client request. Divide of 1 means send every pixel, 2 means every other pixel, 3 means every third pixel, and so on; increasing the value drastically reduces transfer size at the cost of image quality. Value must be 1 or greater. Default: 1.",
+  "setting_name": "1",
+  "category": "API Dev",
+  "type": "Integer"
+ },
+ {
+  "id": "APIStreamEnable",
+  "title": "API Video Stream Server Enable (EXPERIMENTAL)",
+  "name": "apistream",
+  "desc": "Allows companion apps to receive compressed video streams over the API. Companion app must support this feature to take advantage of it.\n\nVideo is served unencrypted over the network. May cause older games to hang and crash.\n\nDevelopers: see the wiki page for more details.",
+  "category": "Companion & API",
+  "type": "Bool"
+ },
+ {
+  "id": "EnableAllIOModules",
+  "title": "Enable All IO Modules",
+  "name": "io",
+  "desc": "Manually enable ALL IO emulation.",
+  "category": "I/O Modules",
+  "type": "Bool"
+ },
+ {
+  "id": "EnableACIOModule",
+  "title": "Enable ACIO Module",
+  "name": "acio",
+  "desc": "Manually enable ACIO emulation.",
+  "category": "I/O Modules",
+  "type": "Bool"
+ },
+ {
+  "id": "EnableICCAModule",
+  "title": "Enable ICCA Module",
+  "name": "icca",
+  "desc": "Manually enable ICCA emulation.",
+  "category": "I/O Modules",
+  "type": "Bool"
+ },
+ {
+  "id": "EnableDEVICEModule",
+  "title": "Enable DEVICE Module",
+  "name": "device",
+  "desc": "Manually enable DEVICE emulation.",
+  "category": "I/O Modules",
+  "type": "Bool"
+ },
+ {
+  "id": "EnableEXTDEVModule",
+  "title": "Enable EXTDEV Module",
+  "name": "extdev",
+  "desc": "Manually enable EXTDEV emulation.",
+  "category": "I/O Modules",
+  "type": "Bool"
+ },
+ {
+  "id": "EnableAMI2000Module",
+  "title": "Enable AMI2000 Module",
+  "name": "ami2000",
+  "desc": "Manually enable AMI2000 emulation.",
+  "category": "I/O Modules",
+  "type": "Bool"
+ },
+ {
+  "id": "EnableSCIUNITModule",
+  "title": "Enable SCIUNIT Module",
+  "name": "sciunit",
+  "desc": "Manually enable SCIUNIT emulation.",
+  "category": "I/O Modules",
+  "type": "Bool"
+ },
+ {
+  "id": "EnableDevicePassthrough",
+  "title": "Enable device passthrough",
+  "name": "devicehookdisable",
+  "desc": "Disable I/O and serial device hooks.",
+  "category": "I/O Modules",
+  "type": "Bool"
+ },
+ {
+  "id": "ForceWinTouch",
+  "title": "Touch Compatibility Mode (Disable Raw Input Touch)",
+  "name": "wintouch",
+  "desc": "For touch screen input, disable usage of Raw Input API and instead use Win8 Pointer API or Win7 Touch API. Results in better compatibility with some touch screens, but may result in worse performance and higher latency.",
+  "category": "Touch Parameters",
+  "type": "Bool"
+ },
+ {
+  "id": "ForceTouchEmulation",
+  "title": "Force Legacy Touch Emulation",
+  "name": "touchemuforce",
+  "desc": "Force enable hook for GetTouchInputInfo API and inject WM_TOUCH events. Do not enable this unless you have trouble with using a mouse to emulate touch input.",
+  "category": "Touch Parameters",
+  "type": "Bool"
+ },
+ {
+  "id": "InvertTouchCoordinates",
+  "title": "Invert Touch",
+  "name": "touchinvert",
+  "desc": "Inverts touch coordinates; only works for default raw input handler and IIDX/SDVX native touch handler, and not Windows Touch API.",
+  "category": "Touch Parameters",
+  "type": "Bool"
+ },
+ {
+  "id": "RawInputTouchAspectRatio",
+  "title": "Raw Input Touch Fix Aspect Ratio",
+  "name": "rawtouchaspect",
+  "desc": "Compensate for letterboxing/pillarboxing when the game runs at a display mode with a different aspect ratio than the touch panel's native resolution. Only affects the default raw input touch handler. This is automatically enabled, only force on or off if you have trouble.\n\nauto (default): automatically enable on a per-game basis.\non: forced on\noff: forced off",
+  "category": "Touch Parameters",
+  "type": "Enum",
+  "elements": [
+   [
+    "auto",
+    ""
+   ],
+   [
+    "on",
+    ""
+   ],
+   [
+    "off",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "DisableTouchCardInsert",
+  "title": "Disable Touch Card Insert (DEPRECATED - use -touchcard instead)",
+  "name": "touchnocard",
+  "desc": "Disables touch overlay card insert button.",
+  "category": "Touch Parameters",
+  "type": "Bool",
+  "hidden": true
+ },
+ {
+  "id": "spice2x_TouchCardInsert",
+  "title": "Show Insert Card button (DEPRECATED)",
+  "name": "sp2x-touchcard",
+  "desc": "Show Insert Card touch button on main display. DEPRECATED - only works in very specific situations (jubeat + wintouch)",
+  "category": "Touch Parameters",
+  "display_name": "touchcard",
+  "aliases": "touchcard",
+  "type": "Bool",
+  "hidden": true
+ },
+ {
+  "id": "ICCAReaderPort",
+  "title": "ICCA Reader Port",
+  "name": "reader",
+  "desc": "Connects to and uses a ICCA on a given COM port.",
+  "category": "NFC Card Readers",
+  "type": "Text"
+ },
+ {
+  "id": "ICCAReaderPortToggle",
+  "title": "ICCA Reader Port (with toggle)",
+  "name": "togglereader",
+  "desc": "Connects to and uses a ICCA on a given COM port, and enabled NumLock toggling between P1/P2.",
+  "category": "NFC Card Readers",
+  "type": "Text"
+ },
+ {
+  "id": "CardIOHIDReaderSupport",
+  "title": "CardIO HID Reader Support",
+  "name": "cardio",
+  "desc": "Enables detection and support of cardio HID readers.",
+  "category": "NFC Card Readers",
+  "type": "Bool"
+ },
+ {
+  "id": "CardIOHIDReaderOrderFlip",
+  "title": "CardIO HID Reader Order Flip",
+  "name": "cardioflip",
+  "desc": "Flips the order of detection for P1/P2.",
+  "category": "NFC Card Readers",
+  "type": "Bool"
+ },
+ {
+  "id": "CardIOHIDReaderOrderToggle",
+  "title": "CardIO HID Reader Order Toggle",
+  "name": "cardiotoggle",
+  "desc": "Toggles reader between P1/P2 using the NumLock key state.",
+  "category": "NFC Card Readers",
+  "type": "Bool"
+ },
+ {
+  "id": "HIDSmartCard",
+  "title": "HID SmartCard (ACR122U)",
+  "name": "scard",
+  "desc": "Detects and uses HID smart card readers for card input. Developed for ACR122U reader.",
+  "category": "NFC Card Readers",
+  "type": "Bool"
+ },
+ {
+  "id": "HIDSmartCardOrderFlip",
+  "title": "HID SmartCard Order Flip",
+  "name": "scardflip",
+  "desc": "Flips the order of detection for P1/P2.",
+  "category": "NFC Card Readers",
+  "type": "Bool"
+ },
+ {
+  "id": "HIDSmartCardOrderToggle",
+  "title": "HID SmartCard Order Toggle",
+  "name": "scardtoggle",
+  "desc": "Toggles reader between P1/P2 using the NumLock key state.",
+  "category": "NFC Card Readers",
+  "type": "Bool"
+ },
+ {
+  "id": "HIDSmartCardIdConvert",
+  "title": "HID SmartCard Fix UID",
+  "name": "scardfix",
+  "desc": "Modify behavior of SmartCard UID logic.\n\nlegacy (default): Preserve buggy old behavior\n\nfix: Add E00401 to non-FeliCa cards, scan FeliCa cards as-is (Recommended for most users)\n\nall: Add E00401 to all cards, including FeliCa cards (For really old games only)\n\nThe algorithm is simple; the prefix is applied, the scanned card number is appended up to 8 bytes, and remaining digits are discarded. For example, abcd56780123 is converted to e00401abcd567801 on card in. This results in different card numbers so be careful when connecting to servers!",
+  "category": "NFC Card Readers",
+  "type": "Enum",
+  "elements": [
+   [
+    "legacy",
+    "Use cards as-is"
+   ],
+   [
+    "fix",
+    "Fix bad cards only"
+   ],
+   [
+    "all",
+    "Force all cards"
+   ]
+  ]
+ },
+ {
+  "id": "SextetStreamPort",
+  "title": "SextetStream Port",
+  "name": "sextet",
+  "desc": "Use a SextetStream device on a given COM port.",
+  "category": "I/O Options",
+  "type": "Text"
+ },
+ {
+  "id": "EnableBemaniTools5API",
+  "title": "Enable BemaniTools 5 API",
+  "name": "bt5api",
+  "desc": "Enables partial BemaniTools 5 API compatibility layer.",
+  "category": "BT5 API",
+  "type": "Bool"
+ },
+ {
+  "id": "RealtimeProcessPriority",
+  "title": "Realtime Process Priority (DEPRECATED - use -processpriority instead)",
+  "name": "realtime",
+  "desc": "Sets the process priority to realtime; can help with odd lag spikes.",
+  "category": "Performance",
+  "type": "Bool",
+  "hidden": true
+ },
+ {
+  "id": "spice2x_ProcessPriority",
+  "title": "Process Priority",
+  "name": "sp2x-processpriority",
+  "desc": "Sets the process priority, which can help with odd lag spikes. Default: high.",
+  "category": "Performance",
+  "display_name": "processpriority",
+  "aliases": "processpriority",
+  "type": "Enum",
+  "elements": [
+   [
+    "belownormal",
+    ""
+   ],
+   [
+    "normal",
+    ""
+   ],
+   [
+    "abovenormal",
+    ""
+   ],
+   [
+    "high",
+    ""
+   ],
+   [
+    "realtime",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "spice2x_ProcessAffinity",
+  "title": "Process Affinity",
+  "name": "sp2x-processaffinity",
+  "desc": "Set process affinity by calling SetProcessAffinityMask. Must provide a hexadecimal mask (e.g., 0x1ff00).",
+  "category": "Performance",
+  "display_name": "processaffinity",
+  "aliases": "processaffinity",
+  "type": "Hex"
+ },
+ {
+  "id": "spice2x_ProcessorEfficiencyClass",
+  "title": "Process Efficiency Class",
+  "name": "sp2x-processefficiency",
+  "desc": "Has no effect if -processaffinity is set. Default: Use all cores.",
+  "category": "Performance",
+  "display_name": "processefficiency",
+  "aliases": "processefficiency",
+  "type": "Enum",
+  "elements": [
+   [
+    "all",
+    "Use all cores"
+   ],
+   [
+    "pcores",
+    "Performant cores only"
+   ],
+   [
+    "ecores",
+    "Efficient cores only"
+   ]
+  ]
+ },
+ {
+  "id": "HeapSize",
+  "title": "Heap Size",
+  "name": "h",
+  "desc": "Custom heap size in bytes.",
+  "category": "Development",
+  "type": "Integer",
+  "hidden": true
+ },
+ {
+  "id": "spice2x_NvapiProfile",
+  "title": "NVIDIA profile optimization",
+  "name": "sp2x-nvprofile",
+  "desc": "Creates an NVIDIA application profile for spice(64).exe and applies GPU tweaks.\n\nDisables G-SYNC by setting the Monitor Technology to 'Fixed Refresh', sets v-sync to 'Application Controlled', and the Power Management Mode to 'Prefer maximum performance'.\n\nG-SYNC may fail to disable properly; try enabling full-screen optimizations (FSO) for spice(64).exe.\n\nMay not work as expected for some games; namely G-SYNC and SDVX.",
+  "category": "Graphics",
+  "display_name": "nvprofile",
+  "aliases": "nvprofile",
+  "type": "Bool"
+ },
+ {
+  "id": "DisableAudioHooks",
+  "title": "Disable All Spice Audio Hooks",
+  "name": "audiohookdisable",
+  "desc": "Disables all audio hooks, including device initialization and volume hooks.\n\nDefault: off (allow Spice to hook IMMDeviceEnumerator for and optionally let you use a different backend instead of exclusive WASAPI).\n\nCheck this to allow games to natively access your audio device.",
+  "category": "Audio Hacks",
+  "type": "Bool"
+ },
+ {
+  "id": "spice2x_DisableVolumeHook",
+  "title": "Disable Audio Volume Hook",
+  "name": "sp2x-volumehookdisable",
+  "desc": "Disables audio volume hook.\n\nDefault: off (prevent games from changing audio volume by hooking IAudioEndpointVolume).\n\nCheck this to allow games to freely change your volume.",
+  "category": "Audio Hacks",
+  "display_name": "volumehookdisable",
+  "aliases": "volumehookdisable",
+  "type": "Bool"
+ },
+ {
+  "id": "AudioShared",
+  "title": "WASAPI Force Shared Mode & Auto-Resample (EXPERIMENTAL)",
+  "name": "wasapishared",
+  "desc": "This option converts all WASAPI exclusive mode requests to shared mode.\n\nMany games have patches that turn on shared mode, but this option is better! Windows will automatically perform sample rate conversion - you do not need to manually set the sample rate of your audio device before launching the game.",
+  "category": "Audio",
+  "type": "Bool"
+ },
+ {
+  "id": "spice2x_LowLatencySharedAudio",
+  "title": "Low Latency Shared Audio",
+  "name": "sp2x-lowlatencysharedaudio",
+  "desc": "Force the usage of smallest buffer size supported by the device when shared mode audio is used. Works for games using DirectSound or shared WASAPI; no effect for exclusive WASAPI and ASIO. For best results (under 10ms), use the default Windows inbox audio driver instead of manufacturer supplied driver. Requires Windows 10 and above.",
+  "category": "Audio",
+  "display_name": "lowlatencysharedaudio",
+  "aliases": "lowlatencysharedaudio",
+  "type": "Bool"
+ },
+ {
+  "id": "AudioBackend",
+  "title": "Spice Audio Hook Backend (DEPRECATED - use -asioconvert instead)",
+  "name": "audiobackend",
+  "desc": "Selects the audio backend to use when spice audio hook is enabled, overriding exclusive WASAPI. Does nothing for games that do not output to exclusive WASAPI.",
+  "category": "Audio Conversion",
+  "type": "Enum",
+  "hidden": true,
+  "elements": [
+   [
+    "asio",
+    "ASIO"
+   ],
+   [
+    "waveout",
+    "broken, do not use"
+   ]
+  ]
+ },
+ {
+  "id": "AsioDriverId",
+  "title": "Spice Audio Hook ASIO Driver ID (DEPRECATED - use -asioconvert instead)",
+  "name": "asiodriverid",
+  "desc": "Selects the ASIO driver id to use when Spice Audio Backend is set to ASIO.",
+  "category": "Audio Conversion",
+  "type": "Integer",
+  "hidden": true
+ },
+ {
+  "id": "AsioDriverName",
+  "title": "WASAPI Exclusive to ASIO Conversion",
+  "name": "asioconvert",
+  "desc": "Converts WASAPI Exclusive audio output to ASIO. Value here should match registry key under HKLM\\SOFTWARE\\ASIO\\\n\nUse this if the game is configured to use WASAPI Exclusive but you want to use your ASIO driver instead.\n\nThis should only be used as last resort if your audio device does not support WASAPI Exclusive.\n\nDoes nothing for games that do not output to exclusive WASAPI.",
+  "category": "Audio Conversion",
+  "type": "Text"
+ },
+ {
+  "id": "AudioDummy",
+  "title": "WASAPI Dummy Context",
+  "name": "audiodummy",
+  "desc": "Uses a dummy `IAudioClient` context to maintain full audio control. This is automatically enabled when required and not normally needed.",
+  "category": "Audio Hacks",
+  "type": "Bool",
+  "hidden": true
+ },
+ {
+  "id": "DownmixAudioToStereo",
+  "title": "WASAPI Stereo Downmix",
+  "name": "downmix",
+  "desc": "Downmixes multi-channel (surround) audio output to stereo.\n\nNote that in all of the options, subwoofer (LFE) is dropped.\n\nac4 (recommended): AC-4 algorithm (ETSI TS 103 190-1) - front left/right pass through, center and surrounds fold in at -3 dB.\n\nnormalize: all channels equally loud.\n\nfront: front channels only.\n\nrear: rear channels only.\n\nside: side channels only.",
+  "category": "Audio Conversion",
+  "type": "Enum",
+  "elements": [
+   [
+    "ac4",
+    "AC-4 downmix"
+   ],
+   [
+    "normalize",
+    "All channels"
+   ],
+   [
+    "front",
+    "Front channels only"
+   ],
+   [
+    "rear",
+    "Rear channels only"
+   ],
+   [
+    "side",
+    "Side channels only"
+   ]
+  ]
+ },
+ {
+  "id": "VolumeBoost",
+  "title": "WASAPI/ASIO Boost Audio Volume",
+  "name": "volumeboost",
+  "desc": "Artificially amplifies the hooked audio output by the selected amount, applied right before the audio reaches the device. Works regardless of channel layout or downmixing.\n\nLouder settings may cause clipping/distortion, use caution.",
+  "category": "Audio",
+  "type": "Enum",
+  "elements": [
+   [
+    "3",
+    "+3 dB"
+   ],
+   [
+    "6",
+    "+6 dB"
+   ],
+   [
+    "9",
+    "+9 dB"
+   ],
+   [
+    "12",
+    "+12 dB"
+   ],
+   [
+    "15",
+    "+15 dB"
+   ],
+   [
+    "20",
+    "+20 dB"
+   ],
+   [
+    "25",
+    "+25 dB"
+   ],
+   [
+    "30",
+    "+30 dB"
+   ]
+  ]
+ },
+ {
+  "id": "AudioResample",
+  "title": "WASAPI Exclusive Mode Resampling",
+  "name": "resample",
+  "desc": "Resamples the hooked audio output to a fixed sample rate before it reaches the device. Useful when a game requests a sample rate the device cannot output in exclusive mode (e.g. the game wants 44100 Hz but the device is locked to 48000 Hz).\n\nSelect the TARGET sample rate (one that your audio card supports).\n\nWill result in couple milliseconds of latency and increased CPU usage when active.",
+  "category": "Audio Conversion",
+  "type": "Enum",
+  "elements": [
+   [
+    "44100",
+    "44.1 kHz"
+   ],
+   [
+    "48000",
+    "48 kHz"
+   ],
+   [
+    "88200",
+    "88.2 kHz"
+   ],
+   [
+    "96000",
+    "96 kHz"
+   ],
+   [
+    "176400",
+    "176.4 kHz"
+   ],
+   [
+    "192000",
+    "192 kHz"
+   ]
+  ]
+ },
+ {
+  "id": "AudioExclusiveBuffer",
+  "title": "WASAPI Exclusive Buffer Size",
+  "name": "exclusivebuffer",
+  "desc": "Enlarges the WASAPI exclusive-mode device buffer to the specified duration in milliseconds.\n\nTry setting this to 10 or even 20 if you hear crackling or glitches (at the cost of slightly increased latency).",
+  "setting_name": "16",
+  "category": "Audio Conversion",
+  "type": "Integer"
+ },
+ {
+  "id": "AsioDownmixToStereo",
+  "title": "ASIO 7.1 to Stereo Downmix",
+  "name": "asiodownmix",
+  "desc": "Extracts a single stereo channel pair from a multi-channel ASIO output, mapping the selected pair to the device's first two channels.\n\nChannel pairs assume a standard 7.1 ASIO layout (0-indexed):\n\nfront: channels 0/1 (front left/right).\n\ncenter: channel 2 (front center, duplicated to both outputs).\n\nrear: channels 4/5 (rear left/right).\n\nside: channels 6/7 (side left/right).",
+  "category": "Audio Conversion",
+  "type": "Enum",
+  "elements": [
+   [
+    "front",
+    "Front (ch 0/1)"
+   ],
+   [
+    "center",
+    "Center (ch 2)"
+   ],
+   [
+    "rear",
+    "Rear (ch 4/5)"
+   ],
+   [
+    "side",
+    "Side (ch 6/7)"
+   ]
+  ]
+ },
+ {
+  "id": "DelayBy5Seconds",
+  "title": "Delay by 5 Seconds (DEPRECATED - use -sleepduration instead)",
+  "name": "sleep",
+  "desc": "Waits five seconds before starting the game.",
+  "category": "Miscellaneous",
+  "type": "Bool"
+ },
+ {
+  "id": "spice2x_DelayByNSeconds",
+  "title": "Delay Game Launch",
+  "name": "sp2x-sleepduration",
+  "desc": "Wait for N seconds before starting the game.",
+  "category": "Miscellaneous",
+  "display_name": "sleepduration",
+  "aliases": "sleepduration",
+  "type": "Integer"
+ },
+ {
+  "id": "LoadStubs",
+  "title": "Load KBT/KLD Stubs",
+  "name": "stubs",
+  "desc": "Enables loading kbt/kld stub files.",
+  "category": "Development",
+  "type": "Bool"
+ },
+ {
+  "id": "AdjustOrientation",
+  "title": "Adjust Display Orientation (DEPRECATED - use -autoorientation instead)",
+  "name": "adjustorientation",
+  "desc": "Automatically adjust the orientation of your display in portrait games. WARNING: game may launch at incorrect refresh rate! Use in combination with -graphics-force-refresh flag to fix.",
+  "category": "Graphics",
+  "type": "Bool"
+ },
+ {
+  "id": "spice2x_AutoOrientation",
+  "title": "Rotate Monitor",
+  "name": "sp2x-autoorientation",
+  "desc": "Change the orientation of the primary display before launching the game. It will be restored on exit",
+  "category": "Monitor",
+  "display_name": "autoorientation",
+  "aliases": "autoorientation",
+  "type": "Enum",
+  "elements": [
+   [
+    "0",
+    "Portrait"
+   ],
+   [
+    "1",
+    "Portrait, Flipped"
+   ],
+   [
+    "2",
+    "Landscape"
+   ],
+   [
+    "3",
+    "Landscape, Flipped"
+   ]
+  ]
+ },
+ {
+  "id": "ChangeResolution",
+  "title": "Change Monitor Resolution",
+  "name": "changeres",
+  "desc": "Changes monitor resolution before booting the game.",
+  "setting_name": "1280,720",
+  "category": "Monitor",
+  "type": "Text"
+ },
+ {
+  "id": "LogLevel",
+  "title": "AVS Log Level",
+  "name": "loglevel",
+  "desc": "Set the level of detail for AVS log messages written to the log. Does not affect logging from spice.",
+  "category": "Debug Log",
+  "type": "Enum",
+  "elements": [
+   [
+    "fatal",
+    ""
+   ],
+   [
+    "warning",
+    ""
+   ],
+   [
+    "info",
+    ""
+   ],
+   [
+    "misc",
+    ""
+   ],
+   [
+    "all",
+    ""
+   ],
+   [
+    "disable",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "EAAutomap",
+  "title": "EA Automap",
+  "name": "automap",
+  "desc": "Enable automap in patch configuration.",
+  "category": "Network Dev",
+  "type": "Bool"
+ },
+ {
+  "id": "EANetdump",
+  "title": "EA Netdump",
+  "name": "netdump",
+  "desc": "Enable automap in network dumping configuration.",
+  "category": "Network Dev",
+  "type": "Bool"
+ },
+ {
+  "id": "BlockingLogger",
+  "title": "Blocking Logger",
+  "name": "logblock",
+  "desc": "Slower but safer logging for debugging.",
+  "category": "Debug Log",
+  "type": "Bool"
+ },
+ {
+  "id": "DebugCreateFile",
+  "title": "Debug CreateFile",
+  "name": "createfiledebug",
+  "desc": "Outputs CreateFile debug prints.",
+  "category": "Debug Log",
+  "type": "Bool"
+ },
+ {
+  "id": "VerboseGraphicsLogging",
+  "title": "Verbose Graphics Logging",
+  "name": "graphicsverbose",
+  "desc": "Enable the verbose logging of graphics hook code.",
+  "category": "Debug Log",
+  "type": "Bool"
+ },
+ {
+  "id": "VerboseAVSLogging",
+  "title": "Verbose AVS Logging",
+  "name": "avsverbose",
+  "desc": "Enable the verbose logging of AVS filesystem functions.",
+  "category": "Debug Log",
+  "type": "Bool"
+ },
+ {
+  "id": "AllowEA3Verbose",
+  "title": "Allow EA3 Verbose Debug Logging",
+  "name": "ea3verbose",
+  "desc": "This option is only useful for network developers; leave this OFF.\n\nBy default, ea3/debug/verbose node is removed by spice to prevent exposing PCBID in the logs. When this is enabled, ea3/debug/verbose node in the XML will be kept and exposed to the game.",
+  "category": "Debug Log",
+  "type": "Bool"
+ },
+ {
+  "id": "DisableColoredOutput",
+  "title": "Disable Colored Output",
+  "name": "nocolor",
+  "desc": "Disable terminal colors for log outputs to console.",
+  "category": "Debug Log",
+  "type": "Bool"
+ },
+ {
+  "id": "DisableACPHook",
+  "title": "Disable ACP Hook",
+  "name": "acphookdisable",
+  "desc": "Force disable advanced code pages hooks for encoding.",
+  "category": "Development",
+  "type": "Bool"
+ },
+ {
+  "id": "DisableSignalHandling",
+  "title": "Disable Signal Handling",
+  "name": "signaldisable",
+  "desc": "Force disable signal handling.",
+  "category": "Development",
+  "type": "Bool"
+ },
+ {
+  "id": "DisableDebugHooks",
+  "title": "Disable Debug Hooks",
+  "name": "dbghookdisable",
+  "desc": "Disable hooks for debug functions (e.g. OutputDebugString).",
+  "category": "Development",
+  "type": "Bool"
+ },
+ {
+  "id": "DisableAvsVfsDriveMountRedirection",
+  "title": "Disable AVS VFS Drive Mount Redirection",
+  "name": "avs-redirect-disable",
+  "desc": "Disable D:/E:/F: AVS VFS mount redirection.",
+  "category": "Development",
+  "type": "Bool"
+ },
+ {
+  "id": "DisableAvsCache",
+  "title": "Disable AVS Cache",
+  "name": "avscachedisable",
+  "desc": "Disable optimization used for some games to cache data file info (only for IIDX32+ for now).",
+  "category": "Development",
+  "type": "Bool"
+ },
+ {
+  "id": "OutputPEB",
+  "title": "Output PEB",
+  "name": "pebprint",
+  "desc": "Prints PEB on startup to console.",
+  "category": "Debug Log",
+  "type": "Bool"
+ },
+ {
+  "id": "DumpSystemInfo",
+  "title": "Dump System Information",
+  "name": "sysdump",
+  "desc": "Print system information to the log on startup. Default: basic.",
+  "category": "Debug Log",
+  "type": "Enum",
+  "elements": [
+   [
+    "none",
+    "Nothing"
+   ],
+   [
+    "basic",
+    "OS, CPU, SMBIOS, GPU"
+   ],
+   [
+    "all",
+    "basic + HID devices"
+   ]
+  ]
+ },
+ {
+  "id": "QKSArgs",
+  "title": "QKS Arguments Override",
+  "name": "qksargs",
+  "desc": "Command line arguments passed to the game.",
+  "setting_name": "",
+  "category": "Advanced Game Options",
+  "type": "Text",
+  "games": [
+   "QuizKnock STADIUM"
+  ]
+ },
+ {
+  "id": "CCJArgs",
+  "title": "CCJ Arguments Override",
+  "name": "ccjargs",
+  "desc": "Command line arguments passed to the game. If left blank, '-nomatchselect' is applied, which disables matchmaking debug menu.",
+  "setting_name": "",
+  "category": "Advanced Game Options",
+  "type": "Text",
+  "games": [
+   "Chase Chase Jokers"
+  ]
+ },
+ {
+  "id": "CCJMouseTrackball",
+  "title": "CCJ Mouse Trackball",
+  "name": "ccjmousetb",
+  "desc": "Use mouse for trackball input; disables any keyboard / joystick control for the trackball. Hold RMB and move the cursor to control the trackball.",
+  "category": "Game Options",
+  "type": "Bool",
+  "games": [
+   "Chase Chase Jokers"
+  ]
+ },
+ {
+  "id": "CCJMouseTrackballWithToggle",
+  "title": "CCJ Mouse Trackball Toggle",
+  "name": "ccjmousetbt",
+  "desc": "Instead of holding RMB, click RMB to toggle trackball input.",
+  "category": "Game Options",
+  "type": "Bool",
+  "games": [
+   "Chase Chase Jokers"
+  ]
+ },
+ {
+  "id": "CCJTrackballSensitivity",
+  "title": "CCJ Trackball Sensitivity",
+  "name": "ccjtrackballsens",
+  "desc": "Adjust sensitivity of trackball. Affects both digital and analog input. Default: 10.",
+  "setting_name": "(0-255)",
+  "category": "Game Options",
+  "type": "Integer",
+  "games": [
+   "Chase Chase Jokers"
+  ]
+ },
+ {
+  "id": "MFGArgs",
+  "title": "MFG Arguments Override",
+  "name": "mfgargs",
+  "desc": "Command line arguments passed to the game.",
+  "setting_name": "",
+  "category": "Advanced Game Options",
+  "type": "Text",
+  "games": [
+   "Mahjong Fight Girl"
+  ]
+ },
+ {
+  "id": "MFGCabType",
+  "title": "MFG Cabinet Type",
+  "name": "mfgcabtype",
+  "desc": "MFG Cabinet Type. Default is HG.",
+  "setting_name": "",
+  "category": "Game Options",
+  "type": "Enum",
+  "games": [
+   "Mahjong Fight Girl"
+  ],
+  "elements": [
+   [
+    "HG",
+    "HG"
+   ],
+   [
+    "B",
+    "B"
+   ],
+   [
+    "C",
+    "C"
+   ],
+   [
+    "UKS",
+    "UKS"
+   ]
+  ]
+ },
+ {
+  "id": "MFGNoIO",
+  "title": "MFG Disable IO Emulation",
+  "name": "mfgnoio",
+  "desc": "Disables BI2X hooks for MFG.",
+  "setting_name": "",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Mahjong Fight Girl"
+  ]
+ },
+ {
+  "id": "PCArgs",
+  "title": "PC Arguments Override",
+  "name": "pcargs",
+  "desc": "Command line arguments passed to the game.",
+  "setting_name": "",
+  "category": "Advanced Game Options",
+  "type": "Text",
+  "games": [
+   "Polaris Chord"
+  ]
+ },
+ {
+  "id": "PCNoIO",
+  "title": "PC Disable IO Emulation",
+  "name": "pcnoio",
+  "desc": "Disables BI2X hooks for PC.",
+  "setting_name": "",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Polaris Chord"
+  ]
+ },
+ {
+  "id": "PCKnobMode",
+  "title": "PC Fader Knobs Mode",
+  "name": "pcknobs",
+  "desc": "Allows SDVX knobs and IIDX turntables to be bound as Polaris Chord faders.",
+  "category": "Game Options",
+  "type": "Bool",
+  "games": [
+   "Polaris Chord"
+  ]
+ },
+ {
+  "id": "UDNArgs",
+  "title": "DANCE aROUND Arguments Override",
+  "name": "udnargs",
+  "desc": "Command line arguments passed to the game.",
+  "setting_name": "",
+  "category": "Advanced Game Options",
+  "type": "Text",
+  "games": [
+   "DANCE aROUND"
+  ]
+ },
+ {
+  "id": "UDNNoIO",
+  "title": "DANCE aROUND Disable IO Emulation",
+  "name": "udnnoio",
+  "desc": "Disables BI2X hooks for DANCE aROUND.",
+  "setting_name": "",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "DANCE aROUND"
+  ]
+ },
+ {
+  "id": "CardConnectArgs",
+  "title": "Card Connect Arguments Override",
+  "name": "cardconnectargs",
+  "desc": "Command line arguments passed to the game.",
+  "setting_name": "",
+  "category": "Advanced Game Options",
+  "type": "Text",
+  "games": [
+   "Card Connect"
+  ]
+ },
+ {
+  "id": "CardConnectNoPrinter",
+  "title": "Card Connect Disable Printer Emulation",
+  "name": "cardconnectnoprinter",
+  "desc": "Leave the native printer driver unhooked for use with a real printer.",
+  "category": "Cab Peripherals",
+  "type": "Bool",
+  "games": [
+   "Card Connect"
+  ]
+ },
+ {
+  "id": "CardConnectPrinterDelay",
+  "title": "Card Connect Simulate Printer Delay",
+  "name": "cardconnectprinterdelay",
+  "desc": "Simulate real printing time: 73 seconds per card, plus hologram and coating delays (up to 99 seconds). Off by default (5 seconds per card).",
+  "category": "Cab Peripherals",
+  "type": "Bool",
+  "games": [
+   "Card Connect"
+  ]
+ },
+ {
+  "id": "CardConnectPrinterOutputPath",
+  "title": "Card Connect Printer Output Path",
+  "name": "cardconnectprinterpath",
+  "desc": "Folder for front/back color images. Defaults to the working directory.",
+  "category": "Cab Peripherals",
+  "type": "Text",
+  "games": [
+   "Card Connect"
+  ]
+ },
+ {
+  "id": "CardConnectPrinterOutputClear",
+  "title": "Card Connect Printer Output Clear",
+  "name": "cardconnectprinterclear",
+  "desc": "Delete saved front/back images in the output directory on startup.",
+  "category": "Cab Peripherals",
+  "type": "Bool",
+  "games": [
+   "Card Connect"
+  ]
+ },
+ {
+  "id": "CardConnectPrinterOutputOverwrite",
+  "title": "Card Connect Printer Output Overwrite",
+  "name": "cardconnectprinteroverwrite",
+  "desc": "Always overwrite the same front/back image pair.",
+  "category": "Cab Peripherals",
+  "type": "Bool",
+  "games": [
+   "Card Connect"
+  ]
+ },
+ {
+  "id": "CardConnectPrinterOutputFormat",
+  "title": "Card Connect Printer Output Format",
+  "name": "cardconnectprinterformat",
+  "desc": "File format for printer output. Defaults to PNG.",
+  "setting_name": "(png/bmp/tga/jpg)",
+  "category": "Cab Peripherals",
+  "type": "Text",
+  "games": [
+   "Card Connect"
+  ]
+ },
+ {
+  "id": "CardConnectPrinterJPGQuality",
+  "title": "Card Connect Printer JPG Quality",
+  "name": "cardconnectprinterjpgquality",
+  "desc": "Quality setting in percent if JPG format is used.",
+  "setting_name": "(1-100)",
+  "category": "Cab Peripherals",
+  "type": "Integer",
+  "games": [
+   "Card Connect"
+  ]
+ },
+ {
+  "id": "spice2x_LightsOverallBrightness",
+  "title": "Lights Brightness Adjustment",
+  "name": "sp2x-lights-brightness",
+  "desc": "Modify HID output values, measured in %. Default is 100. Requires compatible hardware, not just any LED.",
+  "setting_name": "(0-100)",
+  "category": "I/O Options",
+  "display_name": "lightsbrightness",
+  "aliases": "lightsbrightness",
+  "type": "Integer"
+ },
+ {
+  "id": "spice2x_WindowBorder",
+  "title": "Window Border Style",
+  "name": "sp2x-windowborder",
+  "desc": "For windowed mode: overrides window border style. Does not work for all games; can possibly make the game crash! Can also be changed in Screen Resize window (default F11).",
+  "category": "Windowed Settings",
+  "display_name": "windowborder",
+  "aliases": "windowborder",
+  "type": "Enum",
+  "elements": [
+   [
+    "0",
+    "default"
+   ],
+   [
+    "1",
+    "borderless"
+   ],
+   [
+    "2",
+    "resizable window"
+   ]
+  ]
+ },
+ {
+  "id": "spice2x_WindowSize",
+  "title": "Window Size",
+  "name": "sp2x-windowsize",
+  "desc": "For windowed mode: override for window size, width and height separated by comma. Can also be changed in Screen Resize window (default F11).",
+  "setting_name": "1280,720",
+  "category": "Windowed Settings",
+  "display_name": "windowsize",
+  "aliases": "windowsize",
+  "type": "Text"
+ },
+ {
+  "id": "spice2x_WindowPosition",
+  "title": "Window Position",
+  "name": "sp2x-windowpos",
+  "desc": "For windowed mode: override for window position, x and y separated by comma. Can also be changed in Screen Resize window (default F11).",
+  "setting_name": "120,240",
+  "category": "Windowed Settings",
+  "display_name": "windowpos",
+  "aliases": "windowpos",
+  "type": "Text"
+ },
+ {
+  "id": "spice2x_WindowAlwaysOnTop",
+  "title": "Window Always on Top",
+  "name": "sp2x-windowalwaysontop",
+  "desc": "For windowed mode: make window to be always on top of other windows. Can also be changed in Screen Resize window (default F11).",
+  "category": "Windowed Settings",
+  "display_name": "windowalwaysontop",
+  "aliases": "windowalwaysontop",
+  "type": "Bool"
+ },
+ {
+  "id": "WindowForceScaling",
+  "title": "Window Forced Render Scaling",
+  "name": "windowscale",
+  "desc": "For windowed mode: forcibly set DX9 back buffer dimensions to match window size. Reduces pixelated scaling artifacts. Works great for some games, but can COMPLETELY BREAK other games - YMMV!",
+  "category": "Windowed Settings",
+  "type": "Bool"
+ },
+ {
+  "id": "WindowDisableRoundedCorners",
+  "title": "Disable Round Window Corners",
+  "name": "windownoroundcorners",
+  "desc": "Windows 11 and above only: Disables rounded corners on the game window(s).",
+  "category": "Windowed Settings",
+  "type": "Bool"
+ },
+ {
+  "id": "GitaDoraWindowedMainMonitor",
+  "title": "GitaDora Windowed Main Monitor",
+  "name": "gdwmainmonitor",
+  "desc": "For GITADORA Arena windowed mode: place and size the main window to fill this monitor.",
+  "setting_name": "\\\\.\\DISPLAY1",
+  "category": "Game Windowed Settings",
+  "type": "Text",
+  "games": [
+   "GitaDora"
+  ]
+ },
+ {
+  "id": "GitaDoraWindowedLeftMonitor",
+  "title": "GitaDora Windowed LEFT Monitor",
+  "name": "gdwleftmonitor",
+  "desc": "For GITADORA Arena windowed mode: place and size the LEFT window to fill this monitor.",
+  "setting_name": "\\\\.\\DISPLAY2",
+  "category": "Game Windowed Settings",
+  "type": "Text",
+  "games": [
+   "GitaDora"
+  ]
+ },
+ {
+  "id": "GitaDoraWindowedRightMonitor",
+  "title": "GitaDora Windowed RIGHT Monitor",
+  "name": "gdwrightmonitor",
+  "desc": "For GITADORA Arena windowed mode: place and size the RIGHT window to fill this monitor.",
+  "setting_name": "\\\\.\\DISPLAY3",
+  "category": "Game Windowed Settings",
+  "type": "Text",
+  "games": [
+   "GitaDora"
+  ]
+ },
+ {
+  "id": "GitaDoraWindowedSmallMonitor",
+  "title": "GitaDora Windowed SMALL Monitor",
+  "name": "gdwsmallmonitor",
+  "desc": "For GITADORA Arena windowed mode: place and size the SMALL touch window to fill this monitor.",
+  "setting_name": "\\\\.\\DISPLAY4",
+  "category": "Game Windowed Settings",
+  "type": "Text",
+  "games": [
+   "GitaDora"
+  ]
+ },
+ {
+  "id": "GitaDoraWindowedSmallSize",
+  "title": "GitaDora Windowed SMALL Size",
+  "name": "gdwsmallsize",
+  "desc": "Size of the GITADORA Arena SMALL touch window. Defaults to (800,1280).",
+  "setting_name": "800,1280",
+  "category": "Game Windowed Settings",
+  "type": "Text",
+  "games": [
+   "GitaDora"
+  ]
+ },
+ {
+  "id": "GitaDoraWindowedSmallPosition",
+  "title": "GitaDora Windowed SMALL Position",
+  "name": "gdwsmallpos",
+  "desc": "Initial position of the GITADORA Arena SMALL touch window. Defaults to (0,0).",
+  "setting_name": "0,0",
+  "category": "Game Windowed Settings",
+  "type": "Text",
+  "games": [
+   "GitaDora"
+  ]
+ },
+ {
+  "id": "spice2x_IIDXWindowedSubscreenSize",
+  "title": "IIDX Windowed Subscreen Size",
+  "name": "iidxwsubsize",
+  "desc": "Size of the subscreen window. Defaults to (1280,720).",
+  "setting_name": "1280,720",
+  "category": "Game Windowed Settings",
+  "type": "Text",
+  "games": [
+   "Beatmania IIDX"
+  ]
+ },
+ {
+  "id": "spice2x_IIDXWindowedSubscreenPosition",
+  "title": "IIDX Windowed Subscreen Position",
+  "name": "iidxwsubpos",
+  "desc": "Initial position of the subscreen window. Defaults to (0,0).",
+  "setting_name": "0,0",
+  "category": "Game Windowed Settings",
+  "type": "Text",
+  "games": [
+   "Beatmania IIDX"
+  ]
+ },
+ {
+  "id": "IIDXWindowedSubscreenBorderless",
+  "title": "IIDX Windowed Subscreen Borderless",
+  "name": "iidxwsubborderless",
+  "desc": "Remove window decoration from windowed subscreen.",
+  "category": "Game Windowed Settings",
+  "type": "Bool",
+  "games": [
+   "Beatmania IIDX"
+  ]
+ },
+ {
+  "id": "IIDXWindowedSubscreenAlwaysOnTop",
+  "title": "IIDX Windowed Subscreen Always On Top",
+  "name": "iidxwsubtop",
+  "desc": "Keep windowed subscreen on top.",
+  "category": "Game Windowed Settings",
+  "type": "Bool",
+  "games": [
+   "Beatmania IIDX"
+  ]
+ },
+ {
+  "id": "spice2x_JubeatLegacyTouch",
+  "title": "JB Legacy Touch Targets (Deprecated - use -jubeattouchalgo instead)",
+  "name": "sp2x-jubeatlegacytouch",
+  "desc": "Deprecated - use -jubeattouchalgo instead.",
+  "category": "Game Options",
+  "display_name": "jubeatlegacytouch",
+  "aliases": "jubeatlegacytouch",
+  "type": "Bool",
+  "hidden": true,
+  "games": [
+   "Jubeat"
+  ]
+ },
+ {
+  "id": "JubeatTouchAlgo",
+  "title": "JB Touch Algorithm",
+  "name": "jubeattouchalgo",
+  "desc": "For touch screen players: choose the touch algorithm to use.\n\nlegacy - evenly divide the grid into 16 squares; old spicetools behavior, slightly inaccurate in gaps\n\nimproved (default) - squares register as-is, gaps will trigger the closest square\n\nplus - like improved, but gaps can trigger multiple buttons (like the mobile game)\n\naccurate - only touches within squares will trigger; gaps do nothing (for AC size touch screens)",
+  "category": "Game Options",
+  "type": "Enum",
+  "games": [
+   "Jubeat"
+  ],
+  "elements": [
+   [
+    "legacy",
+    ""
+   ],
+   [
+    "improved",
+    ""
+   ],
+   [
+    "plus",
+    ""
+   ],
+   [
+    "accurate",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "JubeatTouchDebug",
+  "title": "JB Touch Debug Overlay",
+  "name": "jubeattouchdebug",
+  "desc": "For touch screen players: draw a debug overlay on the main display. Requires the Spice Overlay to be enabled.\n\nauto (default) - show boundary boxes when a touch screen is detected; otherwise, none\n\nnone - draw nothing\n\nbox - show the 4x4 touch boundary boxes\n\nall - show both the boxes and the touch circles",
+  "category": "Game Options",
+  "type": "Enum",
+  "games": [
+   "Jubeat"
+  ],
+  "elements": [
+   [
+    "auto",
+    ""
+   ],
+   [
+    "none",
+    ""
+   ],
+   [
+    "box",
+    ""
+   ],
+   [
+    "all",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "JubeatTouchDebounce",
+  "title": "JB Touch Debounce",
+  "name": "jubeattouchdebounce",
+  "desc": "For touch screen players: ignore extremely quick touches by requiring a touch to be held for at least this many milliseconds before it registers.\n\nUseful for filtering phantom touches on a noisy touch screen. A higher value adds input latency, so keep it small. Default: off (0).",
+  "setting_name": "8",
+  "category": "Game Options",
+  "type": "Integer",
+  "games": [
+   "Jubeat"
+  ]
+ },
+ {
+  "id": "RBTouchDebug",
+  "title": "RB Touch Debug Overlay",
+  "name": "rbtouchdebug",
+  "desc": "Draw lines to show IR sensor emulation state.\n\nNote: lines will not perfectly align with touches; this is by design, it's showing the IR sensor state, before the game applies its own touch detection algorithm.",
+  "category": "Game Options",
+  "type": "Bool",
+  "games": [
+   "Reflec Beat"
+  ]
+ },
+ {
+  "id": "spice2x_RBTouchScale",
+  "title": "RB Touch Emulation Scale",
+  "name": "sp2x-rbscaletouch",
+  "desc": "Apply scaling to make touch area smaller than the screen. Specify a number out of 1000 (e.g., 800 means 80%). Default: 1000.",
+  "category": "Game Options",
+  "display_name": "rbscaletouch",
+  "aliases": "rbscaletouch",
+  "type": "Integer",
+  "games": [
+   "Reflec Beat"
+  ]
+ },
+ {
+  "id": "RBTouchSize",
+  "title": "RB Touch Emulation Size (DEPRECATED - no longer has any effect)",
+  "name": "rbtouchsize",
+  "desc": "This option is deprecated and no longer has any effect. Reflec Beat touch emulation always uses the 3x3 sensor model.",
+  "category": "Game Options",
+  "type": "Enum",
+  "hidden": true,
+  "games": [
+   "Reflec Beat"
+  ],
+  "elements": [
+   [
+    "3",
+    "3x3"
+   ]
+  ]
+ },
+ {
+  "id": "RBTouchPollRate",
+  "title": "RB Touch Emulation Poll Hz",
+  "name": "rbtouchhz",
+  "desc": "By default, the game polls for touch at ~125Hz. This option overrides that rate; enter a number between 1 and 1000.\n\nHigher rates reduce input latency (the game sees a fresher touch position) but do NOT improve spatial accuracy, and very high rates just waste CPU.",
+  "setting_name": "250",
+  "category": "Game Options",
+  "type": "Integer",
+  "games": [
+   "Reflec Beat"
+  ]
+ },
+ {
+  "id": "spice2x_AsioForceUnload",
+  "title": "ASIO Force Unload On Stop",
+  "name": "sp2x-asioforceunload",
+  "desc": "For certain buggy ASIO drivers, force unload of ASIO driver when audio stream stops. Used for working around ASIO drivers that lock up after force quitting games.",
+  "category": "Audio Hacks",
+  "display_name": "asioforceunload",
+  "aliases": "asioforceunload",
+  "type": "Bool"
+ },
+ {
+  "id": "spice2x_IIDXNoESpec",
+  "title": "IIDX Disable E-spec I/O",
+  "name": "sp2x-iidxnoespec",
+  "desc": "Disable I/O emulation for E-spec I/O upgrade (GELDJ-JX kit).",
+  "category": "Advanced Game Options",
+  "display_name": "iidxnoespec",
+  "aliases": "iidxnoespec",
+  "type": "Bool",
+  "hidden": true,
+  "games": [
+   "Beatmania IIDX"
+  ]
+ },
+ {
+  "id": "spice2x_IIDXWindowedTDJ",
+  "title": "IIDX TDJ Windowed Mode (DEPRECATED - just use -iidxtdj and -w together)",
+  "name": "sp2x-iidxtdjw",
+  "desc": "Enable TDJ, optimized for windowed mode. Press Toggle Subscreen button and use your mouse on the main window.",
+  "category": "Game Options",
+  "display_name": "iidxtdjw",
+  "aliases": "iidxtdjw",
+  "type": "Bool",
+  "hidden": true,
+  "games": [
+   "Beatmania IIDX"
+  ]
+ },
+ {
+  "id": "spice2x_DRSDisableTouch",
+  "title": "DRS Disable Touch Input",
+  "name": "sp2x-drsdisabletouch",
+  "desc": "Disables multitouch input.",
+  "category": "Game Options",
+  "display_name": "drsdisabletouch",
+  "aliases": "drsdisabletouch",
+  "type": "Bool",
+  "games": [
+   "DANCERUSH"
+  ]
+ },
+ {
+  "id": "spice2x_DRSTransposeTouch",
+  "title": "DRS Transpose Touch Input",
+  "name": "sp2x-drstransposetouch",
+  "desc": "Swap x and y values of touch input.",
+  "category": "Game Options",
+  "display_name": "drstransposetouch",
+  "aliases": "drstransposetouch",
+  "type": "Bool",
+  "games": [
+   "DANCERUSH"
+  ]
+ },
+ {
+  "id": "DRSRGBCameraHook",
+  "title": "DRS RGB Camera Hook",
+  "name": "drsrgbcamhook",
+  "desc": "Hook into the RGB camera detection and attempt to use your own non-official webcam. Not every webcam will be compatible with this; YMMV.\n\nNote: this is NOT for the motion camera - you still need a real RealSense camera for that!",
+  "category": "Cab Peripherals",
+  "type": "Bool",
+  "games": [
+   "DANCERUSH"
+  ]
+ },
+ {
+  "id": "spice2x_IIDXNativeTouch",
+  "title": "IIDX Native Touch (DEPRECATED - no longer needed)",
+  "name": "sp2x-iidxnativetouch",
+  "desc": "This option does nothing.\n\nNative touch handling is now enabled by default and this option is no longer needed.",
+  "category": "Advanced Game Options",
+  "display_name": "iidxnativetouch",
+  "aliases": "iidxnativetouch",
+  "type": "Bool",
+  "hidden": true,
+  "games": [
+   "Beatmania IIDX"
+  ]
+ },
+ {
+  "id": "spice2x_IIDXNoSub",
+  "title": "IIDX TDJ Subscreen Disable",
+  "name": "sp2x-iidxnosub",
+  "desc": "Prevents TDJ subscreen from launching a separate window.",
+  "category": "Game Options",
+  "display_name": "iidxnosub",
+  "aliases": "iidxnosub",
+  "type": "Bool",
+  "games": [
+   "Beatmania IIDX"
+  ]
+ },
+ {
+  "id": "IIDXSubMonitorOverride",
+  "title": "IIDX TDJ Subscreen Monitor Override",
+  "name": "iidxsubmonitor",
+  "desc": "If you have three or more monitors, this option can be set to tell the game which monitor is the subscreen.",
+  "setting_name": "\\\\.\\DISPLAY3",
+  "category": "Full Screen Settings",
+  "type": "Text",
+  "games": [
+   "Beatmania IIDX"
+  ]
+ },
+ {
+  "id": "spice2x_IIDXEmulateSubscreenKeypadTouch",
+  "title": "IIDX TDJ Subscreen Keypad Touch Emulation",
+  "name": "sp2x-iidxsubpoke",
+  "desc": "Emulates touches on TDJ subscreen when keypad input is received. Should be used along with 'Unscramble Touch Screen Keypad in TDJ' patch. 00 is mapped to erase button, and Decimal shows/hides the keypad.",
+  "category": "Advanced Game Options",
+  "display_name": "iidxsubpoke",
+  "aliases": "iidxsubpoke",
+  "type": "Bool",
+  "games": [
+   "Beatmania IIDX"
+  ]
+ },
+ {
+  "id": "spice2x_AutoCard",
+  "title": "Auto Card Insert",
+  "name": "sp2x-autocard",
+  "desc": "Periodically present virtual card(s) to the reader, removing the need to press Insert Card button. Only applies to local virtual cards (-card0, -card1, or card0/1.txt), do not use with physical card reader or API.",
+  "category": "Network",
+  "display_name": "autocard",
+  "aliases": "autocard",
+  "type": "Enum",
+  "elements": [
+   [
+    "off",
+    ""
+   ],
+   [
+    "p1",
+    ""
+   ],
+   [
+    "p2",
+    ""
+   ],
+   [
+    "both",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "spice2x_TapeLedAlgorithm",
+  "title": "Tape LED Avg Algorithm",
+  "name": "sp2x-tapeledalgo",
+  "desc": "For games with light arrays, determine the algorithm that is used to translate them into a single light binding in Lights tab. Default: mid.",
+  "category": "I/O Options",
+  "display_name": "tapeledalgo",
+  "aliases": "tapeledalgo",
+  "type": "Enum",
+  "elements": [
+   [
+    "off",
+    "Off"
+   ],
+   [
+    "first",
+    "First LED"
+   ],
+   [
+    "mid",
+    "Middle LED"
+   ],
+   [
+    "last",
+    "Last LED"
+   ],
+   [
+    "avg",
+    "Average color"
+   ]
+  ]
+ },
+ {
+  "id": "spice2x_NoNVAPI",
+  "title": "NVAPI Block",
+  "name": "sp2x-nonvapi",
+  "desc": "Completely block the game from accessing NVAPI. Can be used if NVAPI is returning undesirable results to the game (e.g., wrong values from NvDisplayConfig for SDVX). You may need to apply additional hex edits to boot the game correctly.",
+  "category": "Graphics",
+  "display_name": "nonvapi",
+  "aliases": "nonvapi",
+  "type": "Bool"
+ },
+ {
+  "id": "spice2x_NoD3D9DeviceHook",
+  "title": "Disable D3D9 Device Hook (DEPRECATED - no longer needed for TDJ recording)",
+  "name": "sp2x-nod3d9devhook",
+  "desc": "This was previously required for TDJ play recording, but as of 2024-08-04, it is no longer needed. Completely disable all DXD9 device hook, preventing features like Spice overlay, subscreen window, screenshots, screen resize, touch emulation, streaming to Companion, etc.",
+  "category": "Graphics",
+  "display_name": "nod3d9devhook",
+  "aliases": "nod3d9devhook",
+  "type": "Bool",
+  "hidden": true
+ },
+ {
+  "id": "spice2x_SDVXNoSub",
+  "title": "SDVX Subscreen Disable",
+  "name": "sp2x-sdvxnosub",
+  "desc": "Prevents VM subscreen from launching a separate window.",
+  "category": "Game Options",
+  "display_name": "sdvxnosub",
+  "aliases": "sdvxnosub",
+  "type": "Bool",
+  "games": [
+   "Sound Voltex"
+  ]
+ },
+ {
+  "id": "SDVXFullscreenLandscape",
+  "title": "SDVX Full Screen Landscape Mode (SDVX5+, EXPERIMENTAL)",
+  "name": "sdvxlandscape",
+  "desc": "Allows you to play in landscape by transposing resolution and applying image scaling.\n\nCorrects the in-game perspective camera for the transposed display aspect ratio.\n\nWorks only for SDVX5 and above.\n\nWill launch at 1080p by default; strongly consider combining this with -forceres option to render at monitor native resolution.",
+  "category": "Game Options",
+  "type": "Bool",
+  "games": [
+   "Sound Voltex"
+  ]
+ },
+ {
+  "id": "spice2x_EnableSMXStage",
+  "title": "StepManiaX Stage Lighting Support",
+  "name": "sp2x-smx-stage",
+  "desc": "StepmaniaX stage will show up as a device that can receive lighting output. For configurator, restart spicecfg.exe after enabling this to have the device show up for binding.",
+  "category": "I/O Options",
+  "display_name": "smxstage",
+  "aliases": "smxstage",
+  "type": "Bool"
+ },
+ {
+  "id": "spice2x_EnableSMXDedicab",
+  "title": "StepManiaX Dedicated Cabinet Lighting Support",
+  "name": "sp2x-smx-dedicab",
+  "desc": "StepManiaX Dedicated Cabinet will show up as a device that can receive lighting output. For configurator, restart spicecfg.exe after enabling this to have the device show up for binding.",
+  "category": "I/O Options",
+  "display_name": "smxdedicab",
+  "aliases": "smxdedicab",
+  "type": "Bool"
+ },
+ {
+  "id": "IIDXRecQuality",
+  "title": "IIDX Recording Quality",
+  "name": "iidxreccqp",
+  "desc": "WARNING: double check if your network allows this & your hardware supports it.\n\nFor TDJ Play Record feature, specify ConstQP quality settings for NVENC. Lower is higher quality but bigger file.\n\nTwo options: specify a single number (20) to set CQ Level, or specify comma-separated numbers (23,25,20) to set P, B, I levels.",
+  "category": "Advanced Game Options",
+  "type": "Text",
+  "games": [
+   "Beatmania IIDX"
+  ]
+ },
+ {
+  "id": "IIDXRecDisable",
+  "title": "IIDX Recording Force Disable",
+  "name": "iidxnorec",
+  "desc": "When enabled, this prevents the play record feature from being used.",
+  "category": "Advanced Game Options",
+  "type": "Bool",
+  "games": [
+   "Beatmania IIDX"
+  ]
+ },
+ {
+  "id": "MidiAlgoVer",
+  "title": "MIDI Note Input Algorithm",
+  "name": "midialgo",
+  "desc": "Remember to restart after changing this value.\n\nSwitch algorithm used for MIDI note handling.\n\nauto (default): use v2 for most games, v2_drum for DrumMania and FutureTomTom\n\nv2: new delta-time logic in spice2x, timestamp every on/off events and apply min. sustain period to rapid on/off triggers, supports velocity threshold\n\nv2_drum: same as v2, but disable holds; better for some drum kits\n\nlegacy: legacy poll-based spicetools logic, may behave incorrectly when the same input is mapped to multiple buttons, no support for velocity threshold.",
+  "category": "I/O Options",
+  "type": "Enum",
+  "elements": [
+   [
+    "auto",
+    ""
+   ],
+   [
+    "v2",
+    ""
+   ],
+   [
+    "v2_drum",
+    ""
+   ],
+   [
+    "legacy",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "MidiNoteSustain",
+  "title": "MIDI Note Min. Sustain",
+  "name": "midisustain",
+  "desc": "Remember to restart after changing this value. Only affects v2 MIDI algorithm. Does not affect spicecfg.\n\nSet the minimum duration (in milliseconds) each note is sustained, so that the game's I/O can pick up the input when polled.\n\nIf this is too short, when game polls for input, it may fail to observe quick input (such as drums). If this is too long, rapid hits may be dropped due to coalescing.\n\nRecommended to keep at default of 20ms unless you have issues.",
+  "setting_name": "20",
+  "category": "I/O Options",
+  "type": "Integer"
+ },
+ {
+  "id": "DDRP4IOBufferMode",
+  "title": "DDR P4IO Buffer Algorithm",
+  "name": "ddrp4iobuffer",
+  "desc": "Remember to restart after changing this value.\n\nSets the algorithm used to populate entries to the buffer of controller polls read by the game.\n\nauto (default): thread mode if <120Hz, backfill if >=120Hz\n\nthread: starts a thread to periodically insert polls into the buffer\n\nbackfill: fills the buffer on each frame with last known state info at short regular intervals up to the current time, then writes the current state.\n\nOnly has an effect when emulating P4IO (arkmdxp4.dll).",
+  "category": "Advanced Game Options",
+  "type": "Enum",
+  "games": [
+   "Dance Dance Revolution"
+  ],
+  "elements": [
+   [
+    "auto",
+    ""
+   ],
+   [
+    "thread",
+    ""
+   ],
+   [
+    "backfill",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "InputRequiresFocus",
+  "title": "Input Requires Focus",
+  "name": "inputfocus",
+  "desc": "Determine input behavior when game window is not in focus.\n\nnever: allow input regardless of focus\nnaive (default): only naive bindings check for window focus, rawinput binds are always allowed\nalways: only process input when window is in focus.",
+  "category": "I/O Options",
+  "type": "Enum",
+  "elements": [
+   [
+    "never",
+    ""
+   ],
+   [
+    "naive",
+    ""
+   ],
+   [
+    "always",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "NostalgiaPoke",
+  "title": "Nost Screen Poke",
+  "name": "nostpoke",
+  "desc": "Enables emulation of touch gestures to make it easier to navigate the game without a touchscreen.\n\nThis enables two things:\n  1. Swipe/Touch bindings in Buttons tab (Swipe Next Page, etc)\n  2. PIN pad bindings (make sure Unscramble Keypad patch is applied).",
+  "category": "Game Options",
+  "type": "Bool",
+  "games": [
+   "Nostalgia"
+  ]
+ },
+ {
+  "id": "NostalgiaTouchMode",
+  "title": "Nostalgia Touch Piano",
+  "name": "nosttouch",
+  "desc": "Allows you to play the piano by touching the screen instead of a controller. Use the mode switch button to toggle between interacting with the menu and playing the piano.\n\nVelocity sensitivity is not supported. Touch targets will be pixel-perfect aligned with the judgement line, key beams, and notes.",
+  "category": "Game Options",
+  "type": "Bool",
+  "games": [
+   "Nostalgia"
+  ]
+ },
+ {
+  "id": "ForceBackBufferCount",
+  "title": "V-Sync Buffering",
+  "name": "vsyncbuffer",
+  "desc": "Using triple buffering may improve cases of micro-stuttering but increases input latency.",
+  "category": "Graphics",
+  "type": "Enum",
+  "elements": [
+   [
+    "2",
+    "double buffer"
+   ],
+   [
+    "3",
+    "triple buffer"
+   ]
+  ]
+ },
+ {
+  "id": "SDVXWindowedSubscreenSize",
+  "title": "SDVX Windowed Subscreen Size",
+  "name": "sdvxwsubsize",
+  "desc": "Size of the subscreen window. Defaults to (1920,1080).",
+  "setting_name": "1920,1080",
+  "category": "Game Windowed Settings",
+  "type": "Text",
+  "games": [
+   "Sound Voltex"
+  ]
+ },
+ {
+  "id": "SDVXWindowedSubscreenPosition",
+  "title": "SDVX Windowed Subscreen Position",
+  "name": "sdvxwsubpos",
+  "desc": "Initial position of the subscreen window. Defaults to (0,0).",
+  "setting_name": "0,0",
+  "category": "Game Windowed Settings",
+  "type": "Text",
+  "games": [
+   "Sound Voltex"
+  ]
+ },
+ {
+  "id": "SDVXWindowedSubscreenBorderless",
+  "title": "SDVX Windowed Subscreen Borderless",
+  "name": "sdvxwsubborderless",
+  "desc": "Remove window decoration from windowed subscreen.",
+  "category": "Game Windowed Settings",
+  "type": "Bool",
+  "games": [
+   "Sound Voltex"
+  ]
+ },
+ {
+  "id": "SDVXWindowedSubscreenAlwaysOnTop",
+  "title": "SDVX Windowed Subscreen Always On Top",
+  "name": "sdvxwsubtop",
+  "desc": "Keep windowed subscreen on top.",
+  "category": "Game Windowed Settings",
+  "type": "Bool",
+  "games": [
+   "Sound Voltex"
+  ]
+ },
+ {
+  "id": "LovePlusCamEnable",
+  "title": "LovePlus Camera Enable",
+  "name": "lovepluscam",
+  "desc": "Allow game to access camera; camera must be compatible with game.",
+  "category": "Cab Peripherals",
+  "type": "Bool",
+  "games": [
+   "LovePlus"
+  ]
+ },
+ {
+  "id": "LovePlusPrinterOutputPath",
+  "title": "LovePlus Printer Output Path",
+  "name": "lpprinterpath",
+  "desc": "Path to folder where images will be stored.",
+  "category": "Cab Peripherals",
+  "type": "Text",
+  "games": [
+   "LovePlus"
+  ]
+ },
+ {
+  "id": "LovePlusPrinterOutputClear",
+  "title": "LovePlus Printer Output Clear",
+  "name": "lpprinterclear",
+  "desc": "Clean up saved images in the output directory on startup.",
+  "category": "Cab Peripherals",
+  "type": "Bool",
+  "games": [
+   "LovePlus"
+  ]
+ },
+ {
+  "id": "LovePlusPrinterOutputOverwrite",
+  "title": "LovePlus Printer Output Overwrite",
+  "name": "lpprinteroverwrite",
+  "desc": "Always overwrite the same file in output directory.",
+  "category": "Cab Peripherals",
+  "type": "Bool",
+  "games": [
+   "LovePlus"
+  ]
+ },
+ {
+  "id": "LovePlusPrinterOutputFormat",
+  "title": "LovePlus Printer Output Format",
+  "name": "lpprinterformat",
+  "desc": "File format for printer output.",
+  "setting_name": "(png/bmp/tga/jpg)",
+  "category": "Cab Peripherals",
+  "type": "Text",
+  "games": [
+   "LovePlus"
+  ]
+ },
+ {
+  "id": "LovePlusPrinterJPGQuality",
+  "title": "LovePlus Printer JPG Quality",
+  "name": "lpprinterjpgquality",
+  "desc": "Quality setting in percent if JPG format is used.",
+  "setting_name": "(0-100)",
+  "category": "Cab Peripherals",
+  "type": "Integer",
+  "games": [
+   "LovePlus"
+  ]
+ },
+ {
+  "id": "OptionConflictResolution",
+  "title": "Command Line Args Override",
+  "name": "cmdoverride",
+  "desc": "By default, option values in spicecfg take precedence over command-line args, for legacy compat.\nWhen this is specified in command line, command-line args take precedence instead.",
+  "category": "Development",
+  "type": "Bool",
+  "disabled": true
+ },
+ {
+  "id": "OtocaCamHook",
+  "title": "Otoca Camera Check Bypass",
+  "name": "otocacamhook",
+  "desc": "This game REQUIRES a (compatible) webcam to save progress. If you don't have any, check this option to bypass camera error during boot, allowing you to try out the game.",
+  "category": "Cab Peripherals",
+  "type": "Bool",
+  "games": [
+   "Otoca D'or"
+  ]
+ },
+ {
+  "id": "DisableHighResTimer",
+  "title": "Use Legacy Timers",
+  "name": "notimerhacks",
+  "desc": "Disables high resolution timers, reverting to legacy behavior. Recommended that you leave this OFF for optimal input latency, unless you're on a resource-constrained system (e.g., old cabinet PC)",
+  "category": "Performance",
+  "type": "Bool"
+ },
+ {
+  "id": "EnableICMPHook",
+  "title": "Enable ICMP Emulation",
+  "name": "icmphook",
+  "desc": "Emulate keepalive ping replies in user mode, so the game does not need to open privileged raw ICMP sockets.",
+  "category": "Network Dev",
+  "type": "Bool"
+ },
+ {
+  "id": "EnableNICSpoof",
+  "title": "NIC Spoof",
+  "name": "nicspoof",
+  "desc": "Use with -icmphook.\n\noffline: report a fake Ethernet IPv4 adapter and map DNS names to that address so the game can boot when no real NIC is present. Does not create a real adapter.\n\ntunnelhost: same fake NIC, plus listen for a matching tunnel from a peer.\n\ntunnelclient: same fake NIC, plus connect to a tunnel host. Set -nicspoofhostrealip.",
+  "category": "Network Dev",
+  "type": "Enum",
+  "elements": [
+   [
+    "offline",
+    ""
+   ],
+   [
+    "tunnelhost",
+    ""
+   ],
+   [
+    "tunnelclient",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "NICSpoofIP",
+  "title": "NIC Spoof IP",
+  "name": "nicspoofip",
+  "desc": "Overlay IPv4 for the fake adapter. Used when NIC Spoof is not Default. If unset, 10.100.100.10 is used.\n\nMust be on the same subnet as gateway 10.100.100.1 with mask 255.0.0.0 (10.0.0.0/8). Examples: 10.100.100.10, 10.0.0.10. Do not use 10.0.0.0, 10.255.255.255, the gateway 10.100.100.1, or DNS 10.2.1.10 / 10.2.1.30. Host and client must use different IPs.",
+  "setting_name": "10.100.100.10",
+  "category": "Network Dev",
+  "type": "Text"
+ },
+ {
+  "id": "NICSpoofHostRealIP",
+  "title": "NIC Spoof Tunnel Host",
+  "name": "nicspoofhostrealip",
+  "desc": "Real IP address or hostname of the tunnel host. Required for tunnel client mode. Not used for offline or tunnel host.",
+  "setting_name": "192.168.1.10",
+  "category": "Network Dev",
+  "type": "Text"
+ },
+ {
+  "id": "NICSpoofPort",
+  "title": "NIC Spoof Tunnel Port",
+  "name": "nicspoofport",
+  "desc": "UDP port for the matching tunnel. Host listens on this port; client connects to it. If unset, 51820 is used.",
+  "setting_name": "51820",
+  "category": "Network Dev",
+  "type": "Integer"
+ },
+ {
+  "id": "AutoElevate",
+  "title": "Run as",
+  "name": "runas",
+  "desc": "Controls whether spice will automatically re-launch with administrator privileges at startup.\n\nadmin (default): automatically re-launch with administrator privileges, needed for most games to function properly\n\nuser: skip elevation, run with current user privileges; game may fail to launch, crash, or critical features may silently fail; use at your own risk.",
+  "category": "Development",
+  "type": "Enum",
+  "elements": [
+   [
+    "admin",
+    ""
+   ],
+   [
+    "user",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "CfgForceSoftwareRender",
+  "title": "Configurator Force Software Rendering",
+  "name": "forcesoftware",
+  "desc": "Forces the use of software rendering instead of hardware acceleration for the configurator.",
+  "category": "Development",
+  "type": "Bool"
+ },
+ {
+  "id": "OBSWebSocketEnabled",
+  "title": "OBS WebSocket Enable",
+  "name": "obsenable",
+  "desc": "Enables the in-game OBS Control overlay and its connection to the OBS Studio obs-websocket (v5) server.",
+  "category": "OBS Control",
+  "type": "Bool"
+ },
+ {
+  "id": "OBSWebSocketHost",
+  "title": "OBS WebSocket Host",
+  "name": "obshost",
+  "desc": "Host name or IP address of the OBS Studio obs-websocket (v5) server used by the in-game OBS Control overlay. Defaults to 127.0.0.1 when left empty.",
+  "category": "OBS Control",
+  "type": "Text"
+ },
+ {
+  "id": "OBSWebSocketPort",
+  "title": "OBS WebSocket Port",
+  "name": "obsport",
+  "desc": "Port of the OBS Studio obs-websocket (v5) server. Defaults to 4455 when left empty.",
+  "category": "OBS Control",
+  "type": "Integer"
+ },
+ {
+  "id": "OBSWebSocketPassword",
+  "title": "OBS WebSocket Password",
+  "name": "obspass",
+  "desc": "Password for the OBS Studio obs-websocket (v5) server. Leave empty if authentication is disabled in OBS.",
+  "category": "OBS Control",
+  "type": "Text",
+  "sensitive": true
+ },
+ {
+  "id": "OBSWebSocketDebug",
+  "title": "OBS WebSocket Debug",
+  "name": "obsdebug",
+  "desc": "Writes the OBS WebSocket client's internal connection diagnostics to the log. Only enable this when troubleshooting connection problems.",
+  "category": "OBS Control",
+  "type": "Bool"
+ },
+ {
+  "id": "ScreenshotIncludeOverlay",
+  "title": "Include Overlay in Screenshots",
+  "name": "screenshotoverlay",
+  "desc": "Includes Spice overlay in screenshots.",
+  "category": "General Overlay",
+  "type": "Bool"
+ },
+ {
+  "id": "ScreenshotSubscreens",
+  "title": "Include Subscreens in Screenshots",
+  "name": "screenshotsub",
+  "desc": "Saves each subscreen as a separate PNG alongside the primary screenshot.",
+  "category": "General Overlay",
+  "type": "Bool"
+ }
+]

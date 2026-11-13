@@ -1,0 +1,15 @@
+bin/
+obj/
+dist/
+*.user
+.vs/
+TestResults/
+
+# never commit game data or archives
+*.rar
+*.7z
+*.zip
+*.001
+*.ifs
+*.dll
+*.exe
