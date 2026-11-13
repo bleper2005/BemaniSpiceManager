@@ -60,7 +60,9 @@ public class EndToEndTests
         }
 
         Assert.NotNull(captured);
-        Assert.Equal(Path.Combine(spice, "spice64.exe"), captured!.FileName);
+        // spice2x is copied into the game folder and run from there (it finds modules\ next to itself)
+        Assert.Equal(Path.Combine(game.RootPath, "spice64.exe"), captured!.FileName);
+        Assert.Equal(File.ReadAllText(Path.Combine(spice, "spice64.exe")), File.ReadAllText(captured.FileName));
         Assert.Equal(game.RootPath, captured.WorkingDirectory);
         Assert.Equal(new[] { "-url", "http://localhost:8094", "-p", "012010000004EF09FC10", "-card0", "E00467D170D97EAF", "-w" },
             captured.ArgumentList.ToArray());

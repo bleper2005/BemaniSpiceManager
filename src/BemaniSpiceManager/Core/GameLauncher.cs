@@ -48,20 +48,50 @@ public static class GameLauncher
         return args;
     }
 
-    public static string CommandLine(GameEntry g, AppState state)
+    /// <summary>spice2x looks for modules\ next to its own exe, so it is run from the game folder.</summary>
+    public static string GameSpiceExe(GameEntry g) => Path.Combine(g.RootPath, g.Is64Bit ? "spice64.exe" : "spice.exe");
+
+    public static string CommandLine(GameEntry g, AppState state) =>
+        string.Join(" ", new[] { Shell.Quote(GameSpiceExe(g)) }.Concat(BuildArgs(g, state).Select(Shell.Quote)));
+
+    /// <summary>
+    /// Copies spice.exe / spice64.exe / spicecfg.exe from the chosen spice2x folder into the game
+    /// folder when they differ (spice2x finds the game DLLs relative to its own location).
+    /// Returns an error message or null.
+    /// </summary>
+    public static string? SyncSpice(GameEntry g, AppState state)
     {
-        var exe = Spice2x.Exe(state.SpiceFolder, g.Is64Bit) ?? (g.Is64Bit ? "spice64.exe" : "spice.exe");
-        return string.Join(" ", new[] { Shell.Quote(exe) }.Concat(BuildArgs(g, state).Select(Shell.Quote)));
+        if (!Spice2x.IsValidFolder(state.SpiceFolder))
+            return File.Exists(GameSpiceExe(g)) ? null // no spice2x folder chosen, but the game has its own copy
+                : $"{Path.GetFileName(GameSpiceExe(g))} wasn't found. Set up spice2x in the spice2x tab.";
+        foreach (var name in new[] { "spice64.exe", "spice.exe", "spicecfg.exe" })
+        {
+            var src = Path.Combine(state.SpiceFolder, name);
+            var dst = Path.Combine(g.RootPath, name);
+            if (!File.Exists(src) || SameFile(src, dst)) continue;
+            try { File.Copy(src, dst, true); }
+            catch (IOException ex) { return $"Couldn't update {name} in the game folder (is the game still running?):\n{ex.Message}"; }
+        }
+        return File.Exists(GameSpiceExe(g)) ? null : $"{Path.GetFileName(GameSpiceExe(g))} is missing from the spice2x folder.";
+    }
+
+    static bool SameFile(string a, string b)
+    {
+        if (!File.Exists(b)) return false;
+        var fa = new FileInfo(a); var fb = new FileInfo(b);
+        if (fa.Length != fb.Length) return false;
+        using var sa = fa.OpenRead(); using var sb = fb.OpenRead();
+        return System.Security.Cryptography.SHA256.HashData(sa).AsSpan().SequenceEqual(System.Security.Cryptography.SHA256.HashData(sb));
     }
 
     /// <summary>Starts the game's server (if any) and then spice2x. Returns an error message or null.</summary>
     public static async Task<string?> LaunchAsync(GameEntry g, AppState state, Action<string> log)
     {
-        var exe = Spice2x.Exe(state.SpiceFolder, g.Is64Bit);
-        if (exe == null)
-            return $"{(g.Is64Bit ? "spice64.exe" : "spice.exe")} wasn't found. Set up spice2x in the spice2x tab.";
         if (!Directory.Exists(g.RootPath))
             return $"The game folder is missing:\n{g.RootPath}";
+        var syncErr = SyncSpice(g, state);
+        if (syncErr != null) return syncErr;
+        var exe = GameSpiceExe(g);
 
         var server = ModuleRegistry.Server(g.ServerId);
         if (server != null)

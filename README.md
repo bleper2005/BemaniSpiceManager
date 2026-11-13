@@ -27,8 +27,10 @@ Everything works with the mouse: drop an archive on the window, pick a server, a
   categories with checkboxes and drop-downs. The option list is generated from spice2x's
   `launcher/options.cpp`. 64-bit games run with `spice64.exe` and 32-bit games with `spice.exe`,
   chosen automatically from the game DLL.
-- **Launch.** Starts the game's server if it isn't running, then spice2x from the game folder
-  with `-url`, `-p` and `-card0`. You can copy the command line or save it as a `.bat`.
+- **Launch.** Starts the game's server if it isn't running, then spice2x with `-url`, `-p` and
+  `-card0`. spice2x finds `modules\` next to its own exe, so the app copies the chosen
+  `spice.exe`/`spice64.exe`/`spicecfg.exe` into the game folder (only when they differ) and runs
+  that copy. You can copy the command line or save it as a `.bat`.
 - **Shortcuts.** Each game page can add a desktop or Start menu shortcut that starts the
   server and the game in one click (`BemaniSpiceManager.exe --launch <game id>`, with no window).
   The Settings tab adds shortcuts for the app itself.

@@ -173,9 +173,11 @@ public sealed class GamePage : ScrollViewer
 
     void OpenSpiceCfg()
     {
-        var cfg = string.IsNullOrEmpty(_state.SpiceFolder) ? null : Path.Combine(_state.SpiceFolder, "spicecfg.exe");
-        if (cfg == null || !File.Exists(cfg)) { Error("spicecfg.exe wasn't found. Set up spice2x in the spice2x tab."); return; }
-        // spicecfg detects the game from the working directory
+        // like spice64.exe, spicecfg finds the game relative to its own location, so run the game folder's copy
+        var err = GameLauncher.SyncSpice(_g, _state);
+        if (err != null) { Error(err); return; }
+        var cfg = Path.Combine(_g.RootPath, "spicecfg.exe");
+        if (!File.Exists(cfg)) { Error("spicecfg.exe wasn't found. Set up spice2x in the spice2x tab."); return; }
         System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(cfg) { WorkingDirectory = _g.RootPath, UseShellExecute = false });
     }
 
