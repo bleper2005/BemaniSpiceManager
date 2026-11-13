@@ -87,6 +87,17 @@ public static class SettingsPage
         root.Children.Add(Setting("7-Zip folder (optional)", FolderPicker(state.SevenZipPath, v => { state.SevenZipPath = v; save(); }, "Folder with 7z.exe"),
             "Only needed if 7-Zip is installed somewhere unusual."));
 
+        root.Children.Add(Header("Shortcuts"));
+        var made = new TextBlock { VerticalAlignment = VerticalAlignment.Center, Foreground = System.Windows.Media.Brushes.DimGray };
+        void Make(string folder)
+        {
+            try { made.Text = "Created " + Shortcuts.CreateForApp(folder); }
+            catch (Exception e) { Error("Couldn't create the shortcut: " + e.Message); }
+        }
+        root.Children.Add(Row(Button("Add app to desktop", () => Make(Shortcuts.Desktop)),
+            Button("Add app to Start menu", () => Make(Shortcuts.StartMenu)), made));
+        root.Children.Add(Note("Each game's page also has buttons for a one-click launch shortcut."));
+
         root.Children.Add(Header("App data"));
         root.Children.Add(Note($"Settings and the game list are stored in {AppState.DataFolder}. Downloaded tools go in {AppState.ToolsFolder}."));
         root.Children.Add(Row(Button("Open app data folder", () => Shell.Open(AppState.DataFolder))));

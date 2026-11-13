@@ -147,6 +147,12 @@ public sealed class GamePage : ScrollViewer
         _root.Children.Add(Row(Button("Copy", () => Clipboard.SetText(_cmd.Text)),
             Button("Save as .bat in game folder", SaveBat, "Writes a launcher you can run without this app")));
 
+        _root.Children.Add(Header("Shortcuts"));
+        _root.Children.Add(Note("A shortcut starts the server and the game in one click, without opening this window."));
+        _root.Children.Add(Row(
+            Button("Add desktop shortcut", () => MakeShortcut(Shortcuts.Desktop)),
+            Button("Add Start menu shortcut", () => MakeShortcut(Shortcuts.StartMenu))));
+
         _root.Children.Add(Header("Remove"));
         _root.Children.Add(Row(
             Button("Remove from list", () => { if (Confirm($"Remove {_g.Name} from the list? Its files stay on disk.")) _cb.Remove(); }),
@@ -171,6 +177,12 @@ public sealed class GamePage : ScrollViewer
         if (cfg == null || !File.Exists(cfg)) { Error("spicecfg.exe wasn't found. Set up spice2x in the spice2x tab."); return; }
         // spicecfg detects the game from the working directory
         System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(cfg) { WorkingDirectory = _g.RootPath, UseShellExecute = false });
+    }
+
+    void MakeShortcut(string folder)
+    {
+        try { _cb.Status("Created " + Shortcuts.CreateForGame(_g, folder, Spice2x.Exe(_state.SpiceFolder, _g.Is64Bit))); }
+        catch (Exception ex) { Error("Couldn't create the shortcut: " + ex.Message); }
     }
 
     void SaveBat()

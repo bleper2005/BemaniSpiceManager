@@ -29,6 +29,9 @@ Everything works with the mouse: drop an archive on the window, pick a server, a
   chosen automatically from the game DLL.
 - **Launch.** Starts the game's server if it isn't running, then spice2x from the game folder
   with `-url`, `-p` and `-card0`. You can copy the command line or save it as a `.bat`.
+- **Shortcuts.** Each game page can add a desktop or Start menu shortcut that starts the
+  server and the game in one click (`BemaniSpiceManager.exe --launch <game id>`, with no window).
+  The Settings tab adds shortcuts for the app itself.
 - **spice2x.** Point it at your spice2x folder or download the latest release from GitHub.
   "Button / key bindings" opens `spicecfg.exe` for the selected game.
 - **Asphyxia CORE.** Start/stop, download or update (your `config.ini`, plugins and savedata

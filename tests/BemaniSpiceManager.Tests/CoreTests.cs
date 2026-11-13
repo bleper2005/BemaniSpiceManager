@@ -205,6 +205,25 @@ public class LaunchTests
     }
 }
 
+public class ShortcutTests
+{
+    [Fact]
+    public void GameShortcut_LaunchesThroughApp()
+    {
+        using var t = new TempDir();
+        var g = new GameEntry { Name = "pop'n music High☆Cheers!!" };
+        var lnk = Shortcuts.CreateForGame(g, t.Path, null);
+        Assert.True(File.Exists(lnk));
+        var type = Type.GetTypeFromProgID("WScript.Shell")!;
+        dynamic shell = Activator.CreateInstance(type)!;
+        var plain = Path.Combine(t.Path, "read.lnk"); // WScript can't open the ☆ name either
+        File.Copy(lnk, plain);
+        dynamic s = shell.CreateShortcut(plain);
+        Assert.Equal($"--launch {g.Id}", (string)s.Arguments);
+        Assert.EndsWith(".exe", (string)s.TargetPath, StringComparison.OrdinalIgnoreCase);
+    }
+}
+
 public class ConfigTests
 {
     [Fact]
