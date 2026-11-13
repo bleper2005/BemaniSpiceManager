@@ -33,7 +33,24 @@ public partial class MainWindow : Window
         if (_games.Count > 0) GameList.SelectedIndex = 0;
         Title = $"Bemani Spice Manager {typeof(MainWindow).Assembly.GetName().Version?.ToString(3)}";
         SetStatus($"Ready. {_games.Count} game(s) loaded from {AppState.DataFolder}  ({Environment.ProcessPath})");
+        WriteDiagnostics();
         Closing += OnClosing;
+    }
+
+    /// <summary>Writes startup.log in the data folder, to debug "my games are missing".</summary>
+    void WriteDiagnostics()
+    {
+        var file = Path.Combine(AppState.DataFolder, "state.json");
+        string read;
+        try { read = File.Exists(file) ? $"exists, {new FileInfo(file).Length} bytes, readable={File.ReadAllText(file).Length > 0}" : "missing"; }
+        catch (Exception ex) { read = "error: " + ex.Message; }
+        var text = string.Join(Environment.NewLine,
+            $"time={DateTime.Now:o}", $"machine={Environment.MachineName}", $"user={Environment.UserName}",
+            $"pid={Environment.ProcessId}", $"session={System.Diagnostics.Process.GetCurrentProcess().SessionId}",
+            $"exe={Environment.ProcessPath}", $"data={AppState.DataFolder}", $"state.json={read}",
+            $"games={_games.Count}", $"loadError={AppState.LastLoadError}",
+            $"desktop={Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)}");
+        try { File.WriteAllText(Path.Combine(AppState.DataFolder, "startup.log"), text); } catch { }
     }
 
     void Save()

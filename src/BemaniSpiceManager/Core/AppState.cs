@@ -72,14 +72,23 @@ public sealed class AppState
 
     static readonly JsonSerializerOptions Json = new() { WriteIndented = true };
 
+    /// <summary>Why the last Load fell back to an empty state, if it did.</summary>
+    public static string? LastLoadError { get; private set; }
+
     public static AppState Load()
     {
+        LastLoadError = null;
         try
         {
             if (File.Exists(FilePath))
                 return JsonSerializer.Deserialize<AppState>(File.ReadAllText(FilePath), Json) ?? new AppState();
         }
-        catch { /* corrupt file: start fresh, keep the old one */ try { File.Copy(FilePath, FilePath + ".bad", true); } catch { } }
+        catch (Exception ex)
+        {
+            // unreadable or corrupt file: start fresh, but keep a copy so nothing is lost
+            LastLoadError = ex.GetType().Name + ": " + ex.Message;
+            try { File.Copy(FilePath, FilePath + ".bad", true); } catch { }
+        }
         return new AppState();
     }
 
