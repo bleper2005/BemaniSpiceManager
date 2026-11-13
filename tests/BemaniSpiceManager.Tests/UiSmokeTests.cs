@@ -49,6 +49,8 @@ public class UiSmokeTests
                 var w = new MainWindow();                     // constructed, never shown
                 var page = new GamePage(game, state, new GamePage.Callbacks(() => { }, _ => { }, () => { }));
                 Assert.NotNull(page.Content);
+                var gone = new GameEntry { Name = "gone", ModuleId = "popn", RootPath = Path.Combine(tmp.Path, "deleted") };
+                Assert.NotNull(new GamePage(gone, state, new GamePage.Callbacks(() => { }, _ => { }, () => { })).Content);
 
                 var opts = new SpiceOptionsWindow(game, "Pop'n Music");
                 var cats = (ListBox)((DockPanel)opts.Content).Children[1];

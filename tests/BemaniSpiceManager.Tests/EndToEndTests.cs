@@ -13,6 +13,27 @@ namespace BemaniSpiceManager.Tests;
 public class EndToEndTests
 {
     [Fact]
+    public async Task MissingFolder_RefusesToLaunch()
+    {
+        var state = new AppState { AsphyxiaFolder = @"C:\nowhere-asphyxia", SpiceFolder = @"C:\nowhere-spice" };
+        foreach (var s in ModuleRegistry.Servers) s.Attach(state);
+        var g = new GameEntry { Name = "gone", RootPath = @"C:\definitely\not\here\M39-2026041500", ServerId = "asphyxia" };
+        Assert.False(g.FolderExists);
+        Assert.Contains("folder missing", g.Subtitle);
+        var started = false;
+        var old = GameLauncher.StartProcess;
+        GameLauncher.StartProcess = _ => { started = true; return null; };
+        try
+        {
+            var err = await GameLauncher.LaunchAsync(g, state, _ => { });
+            Assert.NotNull(err);
+            Assert.Contains("missing", err);
+        }
+        finally { GameLauncher.StartProcess = old; }
+        Assert.False(started);
+    }
+
+    [Fact]
     public async Task ArchiveToLaunch()
     {
         const string realAsphyxia = @"C:\PopnArchive\asphyxia\asphyxia-core-x64.exe";

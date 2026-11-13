@@ -33,7 +33,10 @@ public sealed class GameEntry
     public DateTime Added { get; set; } = DateTime.Now;
 
     [JsonIgnore]
-    public string Subtitle => string.Join("  ", new[] { Model, DateCode }.Where(s => !string.IsNullOrEmpty(s)));
+    public string Subtitle => string.Join("  ", new[] { Model, DateCode, FolderExists ? "" : "(folder missing)" }.Where(s => !string.IsNullOrEmpty(s)));
+
+    [JsonIgnore]
+    public bool FolderExists => !string.IsNullOrEmpty(RootPath) && Directory.Exists(RootPath);
 }
 
 /// <summary>Everything the app remembers, saved as JSON in %LocalAppData%\BemaniSpiceManager.</summary>
