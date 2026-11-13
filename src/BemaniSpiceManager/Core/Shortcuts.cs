@@ -3,8 +3,11 @@ using System.IO;
 namespace BemaniSpiceManager.Core;
 
 /// <summary>Creates Windows .lnk shortcuts for the app and for launching single games.</summary>
-public static class Shortcuts
+public static partial class Shortcuts
 {
+    [System.Runtime.InteropServices.LibraryImport("shell32.dll", StringMarshalling = System.Runtime.InteropServices.StringMarshalling.Utf16)]
+    private static partial void SHChangeNotify(int eventId, uint flags, string item1, IntPtr item2);
+
     public static string AppExe => Environment.ProcessPath ?? Path.Combine(AppContext.BaseDirectory, "BemaniSpiceManager.exe");
 
     public static string Desktop => Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
@@ -47,6 +50,8 @@ public static class Shortcuts
             s.Save();
             System.Runtime.InteropServices.Marshal.FinalReleaseComObject(s);
             File.Move(temp, lnk, true);
+            // Explorer may miss the rename, so announce the new file or it won't appear until a refresh
+            SHChangeNotify(0x2 /* SHCNE_CREATE */, 0x5 /* SHCNF_PATHW */, lnk, IntPtr.Zero);
         }
         finally
         {
